@@ -15,7 +15,29 @@ Note that the Java version expects a return value of null for an empty string or
 
 */
 public class JadenCase {
+
   public static String toJadenCase(String phrase) {
-        return null;
+      String convertedString = phrase;
+        if(convertedString != null && phrase.length() !=0 ) {
+            convertedString = "";
+            boolean flag = false;
+            for (int index = 0; index < phrase.length(); ) {
+                if (index == 0 || flag == true) {
+                    convertedString += (String.valueOf(phrase.charAt(index))).toUpperCase();
+                    flag = false;
+                } else if (phrase.charAt(index) == ' ') {
+                    convertedString += String.valueOf(phrase.charAt(index));
+                    flag = true;
+                } else {
+                    convertedString += String.valueOf(phrase.charAt(index)).toLowerCase();
+                }
+                index++;
+            }
+        }
+        else {
+            convertedString = null;
+        }
+      System.out.println( convertedString );
+      return convertedString;
     }
 }

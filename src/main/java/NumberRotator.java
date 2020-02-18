@@ -18,6 +18,8 @@ max_rot(56789) should return 68957
 public class NumberRotator {
 
     public static long rotate (long n) {
+         //for ()
+
         return 0;
     }
 }

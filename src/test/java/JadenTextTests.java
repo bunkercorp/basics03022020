@@ -6,7 +6,7 @@ public class JadenTextTests {
 
     @Test
     public void test() {
-        assertEquals("toJadenCase doesn't return a valide JadenCase String! try again please :)", JadenCase.toJadenCase("most trees are blue"), "Most Trees Are Blue");
+        assertEquals("toJadenCase doesn't return a valide JadenCase String! try again please  :)", JadenCase.toJadenCase("most trees are blue  &*90927 42789034 sdf 353 rtet-09et e0rt- erj"), "Most Trees Are Blue  &*90927 42789034 Sdf 353 Rtet-09et E0rt- Erj");
     }
 
     @Test

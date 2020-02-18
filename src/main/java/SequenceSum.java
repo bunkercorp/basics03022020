@@ -25,14 +25,22 @@ Output: 0 = 0
 public class SequenceSum {
 
     public static String showSequence(int value) {
+        //value = 10;
         String sequence = "";
         int sum=0;
-        for(int i=0; i<value+1; i++){
-            sequence  = (i != value ) ? (sequence += i + "+") : (sequence+= i);
-            sum += i;
+        if ( value < 0 ){
+            sequence = value + " < 0";
+        } else if ( value == 0 ){
+            sequence = value + " = 0";
+        } else {
+            for (int i = 0; i < value + 1; i++) {
+                sequence = (i != value) ? (sequence += i + "+") : (sequence += i);
+                sum += i;
+            }
+            sequence = sequence + " = " + String.valueOf(sum);
         }
-        sequence = sequence + " = " + String.valueOf(sum);
-        //System.out.println(sequence);
+
+        System.out.println(sequence);
         return sequence;
     }
 }
