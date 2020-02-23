@@ -19,13 +19,34 @@ The input consists of a single non-empty string, consisting only of uppercase En
 doesn't exceed 200 characters
 
 Output
-Return the words of the initial song that Polycarpus used to make a dubsteb remix. Separate the words with a space.
+Return the words of the initial song that Polycarpus used to make a dubsteb remix.
+Separate the words with a space.
 
 
 */
 
+//WUBWUBABCWUB
+
 public class Dubster {
     public static String songDecoder(String song) {
-        return null;
+        String oldSong = "";
+        for (int i = 0; i < song.length(); i++) {
+            if (song.charAt(i) == 'W' && song.charAt(i + 1) == 'U'
+                    && song.charAt(i + 2) == 'B') {
+                oldSong += " ";
+                i += 2;
+            } else {
+                oldSong += song.charAt(i);
+            }
+        }
+        StringBuilder old = new StringBuilder(oldSong.trim());
+        while (old.indexOf(" ") >= 1) {
+            if (old.charAt(old.indexOf(" ") + 1) == ' ') {
+                old.deleteCharAt(old.indexOf(" "));
+            } else {
+                break;
+            }
+        }
+        return old.toString();
     }
 }
