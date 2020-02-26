@@ -32,14 +32,18 @@ public class FractionNumber {
     }
 
     public FractionNumber(long numerator, long denominator) {
+        if (numerator == 0) {
+            this.numerator = 0;
+            this.denominator = 1;
+        }
         if (numerator < 0 && denominator < 0) {
             this.numerator = numerator * -1;
             this.denominator = denominator * -1;
         } else if (numerator > 0 && denominator < 0) {
-            this.denominator=denominator*-1;
+            this.denominator = denominator * -1;
             this.numerator = numerator * -1;
-            //throw new RuntimeException("If you want to create negative fractial number, please set \"-\" in numerator");
-        } else if (denominator > 0) {
+            //throw new RuntimeException("If you want to create negative fraction number, please set \"-\" in numerator");
+        } else if (denominator > 0 && numerator != 0) {
             this.numerator = numerator / gcd(numerator, denominator);
             this.denominator = denominator / gcd(numerator, denominator);
         } else if (denominator == 0) {
@@ -77,7 +81,11 @@ public class FractionNumber {
     }
 
     public static FractionNumber divide(FractionNumber a, FractionNumber b) {
-        return new FractionNumber(a.numerator * b.denominator, a.denominator * b.numerator);
+        if (b.numerator != 0) {
+            return new FractionNumber(a.numerator * b.denominator, a.denominator * b.numerator);
+        } else {
+            throw new RuntimeException("Denominator equals to zero");
+        }
     }
 
     public static FractionNumber add(FractionNumber a, FractionNumber b) {
