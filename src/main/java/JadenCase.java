@@ -16,6 +16,28 @@ Note that the Java version expects a return value of null for an empty string or
 */
 public class JadenCase {
   public static String toJadenCase(String phrase) {
-        return null;
-    }
+      if (phrase == "" || phrase == null) {
+
+          return null;
+      }
+
+      String[] words = phrase.split(" ");
+
+      String newword = "";
+
+
+      for (int i = 0; i < words.length; i++) {
+          String word = words[i];
+          newword = newword.concat(word.replaceFirst(String.valueOf(word.toCharArray()[0]), String.valueOf(word.toCharArray()[0]).toUpperCase()));
+
+          if (i < words.length - 1) {
+
+              newword = newword.concat(" ");
+
+          }
+      }
+
+      return newword;
+
+  }
 }
