@@ -14,6 +14,7 @@ Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real"
 Note that the Java version expects a return value of null for an empty string or null.
 
 */
+//
 public class JadenCase {
     public static String toJadenCase(String phrase) {
         if (phrase == null) {

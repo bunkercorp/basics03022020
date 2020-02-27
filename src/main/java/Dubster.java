@@ -23,20 +23,23 @@ Return the words of the initial song that Polycarpus used to make a dubsteb remi
 
 
 */
-
+//
 public class Dubster {
     public static String songDecoder(String song) {
         String originalSong = song.toUpperCase();
+
         while (originalSong.contains("WUB")) {
             int index = originalSong.indexOf("WUB");
             String str1 = originalSong.substring(0, index);
             String str2 = originalSong.substring(index + 3, originalSong.length());
+
             if (str2.startsWith("WUB")) {
                 originalSong = str1 + str2;
             } else {
                 originalSong = str1 + " " + str2;
             }
         }
+
         return originalSong.trim();
     }
 }
