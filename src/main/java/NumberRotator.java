@@ -35,7 +35,7 @@ public class NumberRotator {
                     tmp +=phrase.charAt(j);
                 }
                 for(int j=0; j< i+1; j++){
-                    rotatearr[i] += phrase.charAt(j);
+                   // rotatearr[i] += phrase.charAt(j);
                 }
                // tmp +=phrase.charAt(i);
                 System.out.println( "tmp:"+tmp+" - "+rotatearr[i] );
