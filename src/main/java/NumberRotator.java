@@ -23,23 +23,21 @@ public class NumberRotator {
          String[] rotatearr = new String [length];
          String endnumber = "";
          String tmp = "";
+         int counter = 0;
             System.out.println(phrase);
-            for (int i=0;i<=length-1;i++) {
+            for (int i=0;i<length-1;i++) {
                 rotatearr[i] = "";
-
-                System.out.println(phrase.charAt(i));
-
-                for (int j = i+1; j<=length-1;j++) {
-                    //System.out.println(j);
+                System.out.println("Phrase: "+phrase+" i:"+i+"-"+phrase.charAt(i));
+                for (int j = i+1; j<length-1;j++) {
                     rotatearr[i] += phrase.charAt(j);
-                    tmp +=phrase.charAt(j);
+                    counter = counter++;
                 }
-                for(int j=0; j< i+1; j++){
-                   // rotatearr[i] += phrase.charAt(j);
-                }
-               // tmp +=phrase.charAt(i);
-                System.out.println( "tmp:"+tmp+" - "+rotatearr[i] );
-                tmp = "";
+                tmp += phrase.charAt(i);
+                rotatearr[i]+=tmp;
+                phrase = rotatearr[i];
+
+                System.out.println( "tmp:"+tmp+" - "+rotatearr[i]+" Phrase: "+phrase );
+               tmp = "";
             }
         return number;
     }
