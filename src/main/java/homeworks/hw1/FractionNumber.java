@@ -55,20 +55,20 @@ public class FractionNumber {
     public String toString() {
         String fraction = "";
         if (FractionNumber.this.numerator < FractionNumber.this.denominator && FractionNumber.this.numerator > 0) {
-            fraction = String.format("%d%s%d", numerator, "/", denominator);
+            fraction = String.format("%d/%d", numerator, denominator);
         } else if (FractionNumber.this.numerator % FractionNumber.this.denominator == 0) {
             long result = numerator / denominator;
-            fraction = "" + result;
+            fraction = String.format("%d",result);
         } else if (FractionNumber.this.numerator > FractionNumber.this.denominator && FractionNumber.this.numerator % FractionNumber.this.denominator != 0) {
             long result = numerator / denominator;
             long result2 = numerator % denominator;
-            fraction = String.format("%d%s%d%s%d", result, " ", result2, "/", denominator);
+            fraction = String.format("%d %d/%d", result, result2, denominator);
         } else if (FractionNumber.this.numerator < 0 && Math.abs(FractionNumber.this.numerator) < FractionNumber.this.denominator) {
-            fraction = String.format("%d%s%d", numerator, "/", denominator);
+            fraction = String.format("%d/%d", numerator, denominator);
         } else if (FractionNumber.this.numerator < FractionNumber.this.denominator && FractionNumber.this.numerator % FractionNumber.this.denominator != 0) {
             long result = Math.abs(numerator / denominator);
             long result2 = Math.abs(numerator % denominator);
-            fraction = String.format("%s%d%s%d%s%d", "-", result, " ", result2, "/",denominator);
+            fraction = String.format("-%d %d/%d", result, result2,denominator);
         }
 
         return fraction;
