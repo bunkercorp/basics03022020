@@ -5,7 +5,7 @@ public class FractionNumber {
     private long numerator;
     private long denominator;
 
-    public static long gcd(long a, long b) {
+    private static long gcd(long a, long b) {
         long d = 0;
         if (a < 0) {
             a *= -1;
@@ -27,7 +27,7 @@ public class FractionNumber {
     }
 
 
-    public static long lcm(long a, long b) {
+    private static long lcm(long a, long b) {
         return a / gcd(a, b) * b;
     }
 
