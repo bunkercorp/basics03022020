@@ -56,10 +56,10 @@ public class FractionNumber {
     public String toString() {
         String result = null;
 
-        if (numerator < denominator && numerator != 0) {
-            result = String.format("%d/%d", numerator, denominator);
-        } else if (denominator == 1) {
+        if (denominator == 1) {
             result = String.format("%d", numerator);
+        } else if ((numerator < denominator && numerator != 0)) {
+            result = String.format("%d/%d", numerator, denominator);
         } else if (numerator > denominator) {
             long temp = numerator / denominator;
             if (temp == 0) {
@@ -73,7 +73,7 @@ public class FractionNumber {
     }
 
     public static void main(String[] args) {
-        FractionNumber f1 = new FractionNumber(1, 1005000);
+        FractionNumber f1 = new FractionNumber(0, 1005000);
         FractionNumber f2 = new FractionNumber(4, 2);
         FractionNumber f3 = f1.add(f2);
         System.out.println("Result of addition of "
