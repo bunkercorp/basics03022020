@@ -24,7 +24,10 @@ Output: 0 = 0
 
 public class SequenceSum {
 
-    public static String showSequence(int value) {
-        return null;
-    }
+    public static String showSequence(int in) {
+        String result = "";
+        for (int i = 0; i <= in; i++) result = (result.length() == 0) ? result + i : result + '+' + i;
+        result = result + " = " + (((in % 2) == 0) ? (in*in/2 + in/2) : (in*(in/2 + 1)));
+        return result;
+    }//showSequence
 }

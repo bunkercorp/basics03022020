@@ -15,7 +15,16 @@ Note that the Java version expects a return value of null for an empty string or
 
 */
 public class JadenCase {
-  public static String toJadenCase(String phrase) {
-        return null;
-    }
+    public static String toJadenCase (String str) {
+        String result = "";
+        if ((str != null) && (str.length() > 0)) {
+            for (int i = 0; i < str.length(); i++) {
+                char current = str.charAt(i);
+                if (((i == 0) || ((i > 0) && ((str.charAt(i - 1) == ' ') || (str.charAt(i - 1) == '\t')))) && (current >= 'a') && (current <= 'z')) current = (char) ((int) current - 32);
+                else if ((i > 0) && (str.charAt(i - 1) != ' ') && (current >= 'A') && (current <= 'Z')) current = (char) ((int) current + 32);
+                result = result + current;
+            }
+        } else result =  null;
+        return(result);
+    }//toJadenCase
 }
