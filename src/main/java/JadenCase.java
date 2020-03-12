@@ -15,7 +15,16 @@ Note that the Java version expects a return value of null for an empty string or
 
 */
 public class JadenCase {
-  public static String toJadenCase(String phrase) {
-        return null;
+    public static String toJadenCase(String phrase) {
+        if (phrase == null || phrase.equals(""))
+            return null;
+
+        char[] ch = phrase.toCharArray();
+        for (int i = 0; i < ch.length; i++) {
+            if (i == 0 || ch[i - 1] == ' ') {
+                ch[i] = Character.toUpperCase(ch[i]);
+            }
+        }
+        return new String(ch);
     }
 }

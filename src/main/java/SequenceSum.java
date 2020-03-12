@@ -9,7 +9,7 @@ which is created by
 Input: LastNumber
 Output: series and result
 
-Example:
+Example:    `
 
 Input: 6
 Output: 0+1+2+3+4+5+6 = 21
@@ -25,6 +25,18 @@ Output: 0 = 0
 public class SequenceSum {
 
     public static String showSequence(int value) {
-        return null;
+        int sum = 0;
+        String result = "0";
+        if (value > 0) {
+            for (int i = 1; i <= value; i++) {
+                result += "+" + i;
+                sum += i;
+            }
+        } else if (value == 0) {
+            System.out.println(value + " = 0");
+        } else {
+            System.out.println(value + " < 0");
+        }
+        return result += " = " + sum;
     }
 }

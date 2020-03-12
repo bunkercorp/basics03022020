@@ -25,7 +25,30 @@ Return the words of the initial song that Polycarpus used to make a dubsteb remi
 */
 
 public class Dubster {
+
     public static String songDecoder(String song) {
-        return null;
+        if (song.length() > 200 || song.equals("")) {
+            return "";
+        }
+
+        char[] songChar = song.toCharArray();
+        StringBuilder strBuilder = new StringBuilder();
+        boolean buildingWord = false;
+
+        int i = 0;
+        while (i < song.length()) {
+            if (songChar[i] == 'W' && songChar[i + 1] == 'U' && songChar[i + 2] == 'B') {
+                if (buildingWord){
+                    strBuilder.append(" ");
+                    buildingWord = false;
+                }
+                i += 3;
+            } else {
+                strBuilder.append(songChar[i]);
+                buildingWord = true;
+                i += 1;
+            }
+        }
+        return strBuilder.toString().trim();
     }
 }
