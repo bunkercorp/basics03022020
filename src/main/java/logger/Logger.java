@@ -1,7 +1,7 @@
 package logger;
 
-public abstract class Logger {
+public abstract interface Logger {
 
-    public void log(String content){};
+    public void log(String content);
 
 }
