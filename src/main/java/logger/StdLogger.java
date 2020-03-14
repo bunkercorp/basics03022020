@@ -3,7 +3,8 @@ package logger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class StdLogger extends Logger {
+public class StdLogger implements Logger {
+    static int counter = 0;
     private static StdLogger instance;
 
     private StdLogger() {
