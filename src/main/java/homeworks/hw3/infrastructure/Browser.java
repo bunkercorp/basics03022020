@@ -16,7 +16,6 @@ public enum Browser {
 
         return (str.contains("CHROME"));
     }
-
     private static boolean isFF(String str) {
         return (str.contains("FF"));
 
