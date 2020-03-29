@@ -2,7 +2,6 @@ package homeworks.hw2.infrastructure;
 
 public enum Browser {
     CHROME, FIREFOX;
-
     public static Browser getBrowser() {
         String str = System.getenv("CM_BROWSER").toUpperCase();
         if (isChrome(str)) {
