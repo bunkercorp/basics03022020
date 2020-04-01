@@ -1,9 +1,9 @@
 package homeworks.hw2.PackageLogger;
 
-public class StdLogger extends Logger{
+public class StdLogger extends Logger {
     private static StdLogger instance;
 
-    private StdLogger (){
+    private StdLogger() {
 
     }
 
@@ -12,4 +12,5 @@ public class StdLogger extends Logger{
             instance = new StdLogger();
         return instance;
     }
+    
 }

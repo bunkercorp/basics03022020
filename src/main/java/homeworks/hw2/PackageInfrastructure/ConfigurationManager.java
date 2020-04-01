@@ -26,6 +26,7 @@ public class ConfigurationManager {
         if (browser.contains("firefox"))
             this.browser = Browser.FIREFOX;
     }
+
 }
 
 
