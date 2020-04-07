@@ -12,5 +12,5 @@ public class StdLogger extends Logger {
             instance = new StdLogger();
         return instance;
     }
-    
+
 }
