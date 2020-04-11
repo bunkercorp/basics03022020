@@ -47,4 +47,5 @@ public class SequenceSum {
             return sb.toString();
         }
     }
+
 }
