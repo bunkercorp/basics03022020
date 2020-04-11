@@ -32,5 +32,4 @@ public class JadenCase {
         }
         return jadenCasePhrase.toString();
     }
-
 }
