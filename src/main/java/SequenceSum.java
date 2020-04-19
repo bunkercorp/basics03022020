@@ -26,15 +26,25 @@ public class SequenceSum {
 
     public static String showSequence(int value) {
         String output="0";
+/*
+if(!(value > 0))
+return String.format("0 %c 0", value == 0 ? '=' : '<')
+else{
+        String output="0";
+        //do stuff
+        }
+* */
         if (value<0)
             return value+" < 0";
         if (value==0)
             return "0 = 0";
         int result=0;
+        //; i <= value;
         for (int i = 1;i<value+1;i++){
             result+=i;
             output+="+"+i;
         }
+        // return output + " = " + result
         output+=" = "+result;
         return output;
     }
