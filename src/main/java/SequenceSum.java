@@ -33,6 +33,7 @@ public class SequenceSum {
                 sum += i;
             }
         } else if (value == 0) {
+            // вернуть, не распечатать
             System.out.println(value + " = 0");
         } else {
             System.out.println(value + " < 0");

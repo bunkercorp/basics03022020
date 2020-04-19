@@ -27,6 +27,7 @@ Return the words of the initial song that Polycarpus used to make a dubsteb remi
 public class Dubster {
 
     public static String songDecoder(String song) {
+        // а что делаем с нулловой строкой?
         if (song.length() > 200 || song.equals("")) {
             return "";
         }
@@ -37,6 +38,11 @@ public class Dubster {
 
         int i = 0;
         while (i < song.length()) {
+            /*
+            * String window = song.substring(i, i+2)
+            * if(window.equals("WUB"))
+            * ну, и избежать ArrayIndexOutOfBound  при i > song.length()-3 тоже нужно            *
+            * */
             if (songChar[i] == 'W' && songChar[i + 1] == 'U' && songChar[i + 2] == 'B') {
                 if (buildingWord){
                     strBuilder.append(" ");
