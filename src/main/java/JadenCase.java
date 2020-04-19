@@ -17,6 +17,7 @@ Note that the Java version expects a return value of null for an empty string or
 //
 public class JadenCase {
     public static String toJadenCase(String phrase) {
+       //phrase == null || phrase.trim().isEmpty()
         if (phrase == null) {
             return null;
         }

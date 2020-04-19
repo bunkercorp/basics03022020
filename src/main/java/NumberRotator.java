@@ -18,17 +18,19 @@ max_rot(56789) should return 68957
 public class NumberRotator {
 
     public static long rotate (long n) {
+// n= -1 ;)
         String longs = "" + n;
         String end;
         String begin;
         String temp;
         long number = 0;
         long max = 0;
-
+// код выполнится при n <10, что лишено всякого смысла
         for (int i = 0; i < longs.length() - 1; i++) {
             temp = longs.substring(0, i);
             begin = longs.substring(i, i + 1);
             end = longs.substring(i + 1, longs.length());
+          // number = Long.parseLong(temp + end + begin)
             longs = temp + end + begin;
             number = Long.parseLong(longs);
             max = Math.max(number, max);

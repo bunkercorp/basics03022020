@@ -29,11 +29,14 @@ public class SequenceSum {
             return value + " < 0";
         } else {
             int sum = 0;
+            // аппендить знак равенства строковым литералом прямо по месту чем не угодило?
             String part1 = " = ";
             String part2 = "+";
             StringBuilder build = new StringBuilder();
+            // а вот если бы цикл шел с единицы, а build = new StringBuilder("0")...
             for (int i = 0; i <= value; i++) {
                 sum += i;
+                //... то в этом ифе отпадала бы необходимость, что очень сохранило бы нервы процессору при больших значениях value, например, Integer.MAX_VALUE
                 if (i < value) {
                     build.append(i).append(part2);
                 }
@@ -41,6 +44,7 @@ public class SequenceSum {
                     build.append(i);
                 }
             }
+            // build.append(" = ").append(sum)
             build.append(part1).append(sum);
             return build.toString();
         }
