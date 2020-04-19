@@ -16,6 +16,7 @@ Note that the Java version expects a return value of null for an empty string or
 */
 public class JadenCase {
   public static String toJadenCase(String phrase) {
+      // phrase == null || phrase.isEmpty()
       if (phrase == "" || phrase == null) {
 
           return null;
@@ -30,8 +31,9 @@ public class JadenCase {
           String word = words[i];
           newword = newword.concat(word.replaceFirst(String.valueOf(word.toCharArray()[0]), String.valueOf(word.toCharArray()[0]).toUpperCase()));
 
+          // что, если в строке миллион слов? Этот иф будет проверен миллион раз. А вот если цикл бежал по i < words.length - 1, то задача сводилась бы к добавлению последнего слова в конец результата сразу после цикла
           if (i < words.length - 1) {
-
+    // StringBuilder как накопитель строкового результата получше, так как не плодит "сиротские" строки в памяти
               newword = newword.concat(" ");
 
           }

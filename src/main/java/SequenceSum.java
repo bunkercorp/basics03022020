@@ -36,8 +36,11 @@ public class SequenceSum {
         }
 
         for (int i = 0; i <= value; i++) {
+           // result = String.format("%s%d", result, i)
             String v = String.valueOf(i);
             result = result.concat(v);
+            // предположим, что value = Integer.MAX_VALUE. Этот иф выполнится больше двух миллиардов раз
+            // в то время как можно было просто после этого цикла добавить знак равенства и не иметь этой проверки
             if (i != value) {
                 result = result.concat("+");
             } else result = result.concat(" = ");
@@ -45,7 +48,7 @@ public class SequenceSum {
             sum += i;
 
         }
-
+    // return String.format("%s = %d", result, sum)
         result = result.concat(String.valueOf(sum));
 
         return result;
