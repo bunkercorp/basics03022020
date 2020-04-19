@@ -34,7 +34,9 @@ public class SequenceSum {
             int sum = 0;
             for (int i = 0; i <= value; i++) {
                 sum += i;
+                // а если цикл бежал бы с единицы ,а в sb лежал бы "0", то в этом ифе не было бы нужды, так как можно было бы добавить знак равенства после цикла
                 if (i == value) {
+                   // append(" = ")
                     sb.append(i)
                             .append(" ")
                             .append("=")

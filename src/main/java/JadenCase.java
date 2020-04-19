@@ -25,7 +25,10 @@ public class JadenCase {
         String[] words = phrase.split("[\\s]");
         StringBuffer jadenCasePhrase = new StringBuffer();
         for (int i = 0; i < words.length; i++) {
-            jadenCasePhrase.append(Character.toUpperCase(words[i].charAt(0))).append(words[i].substring(1));
+            jadenCasePhrase
+                    .append(Character.toUpperCase(words[i].charAt(0))) // как-то
+                    .append(words[i].substring(1)); // легче читается
+            // а вот если цикл бежит по i < words.length - 1, то этот иф не нужен, можно сразу после цикла добавлять последнее слово в результат. Очень сохранит нервы процессору при входной строке о миллионе слов
             if (i < words.length - 1) {
                 jadenCasePhrase.append(" ");
             }
