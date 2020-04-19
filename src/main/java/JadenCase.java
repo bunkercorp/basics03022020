@@ -18,7 +18,10 @@ Note that the Java version expects a return value of null for an empty string or
 */
 public class JadenCase {
     public static String toJadenCase(String phrase) {
+       // а вот phrase == null || phrase.equals("") не плодит NPE вообще никогда ;)
+        // ну, или phrase.isEmpty() в случае этой задачи
         try {
+            // NPE здесь потенциально плодит именно вызов phrase.equals
             if (phrase.equals("") || phrase.equals(null)) {
                 return null;
             } else {

@@ -34,6 +34,7 @@ public class SequenceSum {
         }
         for (int i = 0; i <= value; i++) {
             sum += i;
+    // если вынести эту конкатенацию за цикл, то этот иф не нужен. Это сохранит нервы процессору на больших значениях value, например, Integer.MAX_VALUE
             if (i == value) {
                 text = text + i + " = " + sum;
             } else {

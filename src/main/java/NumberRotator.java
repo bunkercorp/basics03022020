@@ -57,12 +57,16 @@ public class NumberRotator {
         int numberLength = 1;
         number = Math.abs(number);
         // вычисляю в каком десятке находится число
+        // numberLength = Math.pow(10, Math.ceil(Math.log10(number))), и не нужны циклы
         for (int i = 1; i < Math.ceil(Math.log10(number)); i++) {
             numberLength *= 10;
         }
+        // вообще, мутирование входных параметров является вредной привычкой. Ну ,или ты действительно знаешь что делаешь.
         number = number / numberLength + (number % numberLength) * 10;
         long biggestNumber = number;
         for (int i = 0; i < Math.ceil(Math.log10(number)) - 1; i++) {
+          // здесь я вижу дубликаты вычислений number / numberLength и  numberLength / 10
+            // так и просятся в отдельные переменные
             number = (number / numberLength) * numberLength + ((number % (numberLength / 10)) * 10)
                     + (number - (number / numberLength * numberLength)) / (numberLength / 10);
             numberLength /= 10;
