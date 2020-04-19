@@ -26,7 +26,9 @@ public class SequenceSum {
 
     public static String showSequence(int in) {
         String result = "";
+        // ну вооот.. при n = Integer.MAX_VALUE тернарник выполнится 2ккк+ раз, а мог бы только однажды
         for (int i = 0; i <= in; i++) result = (result.length() == 0) ? result + i : result + '+' + i;
+        // хитро. но где обработка отрицательных значений in?
         result = result + " = " + (((in % 2) == 0) ? (in*in/2 + in/2) : (in*(in/2 + 1)));
         return result;
     }//showSequence

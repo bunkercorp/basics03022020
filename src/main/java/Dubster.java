@@ -29,12 +29,21 @@ public class Dubster {
         String result = "";
         if ((song != null) && (song.length() > 0) && (song.length() <= 200)) {
             for (int i = 0; i < song.length(); i++) {
+                /*
+                Сложновато. Предлагаю альтернативу:
+                String window = song.substring(i, i+2)
+                * if (window.equals("WUB"))
+                Но все равно, что-то нужно сделать, когда i < length - 2. А то ArrayIndexOutOfBound не за горами
+                * */
                 if (((song.charAt(i) == 'W') && (song.charAt(i + 1) == 'U') && (song.charAt(i + 2) == 'B'))) {
+                    // Выглядит жутковато. Плюс, тернарник все время пойдет по второму пути, так как сначала в ифе ты удостоверяешься, что условие вложенного тернарника никогда не выполнится
+                    // if(result.length() > 0) и потом сразу же if(result.length() == 0), по сути
                     if ((result.length() > 0) && (result.charAt(result.length() - 1)) != ' ') result = (result.length() == 0) ? result : result + ' ';
                     i += 2;
                 } else result += song.charAt(i);
             }
         }
+        // это условие в тернарнике встречается не впервые. Возможно, имеет смысл передизайнить код
         return (((result.length() > 0) && (result.charAt(result.length()-1) == ' ')) ? result.substring(0, result.length()-1) : result);
     } //songDecoder
 }
