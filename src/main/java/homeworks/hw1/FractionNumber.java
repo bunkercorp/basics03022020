@@ -14,6 +14,7 @@ public class FractionNumber {
         }
         this.num = num;
         this.den = den;
+        // Этот код используется только здесь. Может, имеет смысл передизайнить слегка?
         reduce();
     }
 
@@ -51,6 +52,9 @@ public class FractionNumber {
         String fraction = "";
         if (FractionNumber.this.num < FractionNumber.this.den && FractionNumber.this.num > 0) {
             fraction = String.format("%d/%d", num, den);
+            // FractionNumber.this.num % FractionNumber.this.den == 0 так и просится в переменную.
+            // тогда бы это выглядело как if(var){} else if(num > den && !var){}
+            // сейчас же в коде есть лишнее вычисление
         } else if (FractionNumber.this.num % FractionNumber.this.den == 0) {
             fraction = String.format("%d",num / den);
         } else if (FractionNumber.this.num > FractionNumber.this.den && FractionNumber.this.num % FractionNumber.this.den != 0) {
