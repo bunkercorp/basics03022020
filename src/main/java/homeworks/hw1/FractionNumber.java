@@ -1,4 +1,4 @@
-package FractionPacage;
+package homeworks.hw1;
 
 public class FractionNumber {
     private long numerator;
@@ -7,6 +7,7 @@ public class FractionNumber {
     public FractionNumber(long numeratorInit, long denominatorInit) {
         if(denominatorInit==0)
             throw new RuntimeException("Denominator equals to zero");
+        // nod(numeratorInit, denominatorInit) так и просится в переменную.
         this.numerator = numeratorInit / nod(numeratorInit, denominatorInit);
         this.denominator = denominatorInit / nod(numeratorInit, denominatorInit);
     }
@@ -25,7 +26,9 @@ public class FractionNumber {
     public FractionNumber subtract(FractionNumber inputFN) {
         long a = inputFN.numerator;
         long b = inputFN.denominator;
+        // -a тоже работает
         FractionNumber temp = new FractionNumber((-1) * a, b);
+        // return this.add(new FractionNumber(-a, b))
         return this.add(temp);
     }
 
@@ -62,6 +65,7 @@ public class FractionNumber {
 
     @Override
     public String toString() {
+//  this.numerator / this.denominator просится в переменную, например
         if (this.numerator % this.denominator == 0)
             return String.format("%d", this.numerator / this.denominator);
         if (this.numerator >= this.denominator || this.numerator * (-1) >= this.denominator)
