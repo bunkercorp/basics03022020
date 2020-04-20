@@ -19,7 +19,7 @@ public class FractionNumber {
                         + number.numerator * this.denominator,
                         this.denominator * number.denominator);
     }
-
+// тебе не хотелось сочинить общую для этих двух методов логику?
     public FractionNumber subtract(FractionNumber number) {
         return (number.denominator == this.denominator) ?
                 new FractionNumber(this.numerator - number.numerator,
@@ -38,7 +38,7 @@ public class FractionNumber {
         return new FractionNumber(this.numerator * number.denominator,
                 this.denominator * number.numerator);
     }
-
+// этот сервис инстанциям не нужен, он нужен классу
     private void fractionReduction(long numerator, long denominator) {
         int factor1 = 0;
         for (int i = 2; i <= numerator; i++) {
@@ -50,6 +50,14 @@ public class FractionNumber {
                 }
             }
         }
+        /*
+        * this.denominator = denominator
+        * this.numerator = numerator
+        * if(factor1 != 0){
+         * this.denominator*= factor1
+         * this.numerator*= factor1
+        * }
+        * */
         if (factor1 != 0) {
             this.denominator = denominator / factor1;
             this.numerator = numerator / factor1;
@@ -62,6 +70,7 @@ public class FractionNumber {
     @Override
     public String toString() {
         if (numerator < denominator) {
+            // игнорируем условие ДЗ по мелочам, да? ;)
             return String.format("numerator : %d, denominator : %d", numerator, denominator);
         } else if (numerator > denominator && denominator != 1) {
             return String.format("integer : %d, numerator : %d, denominator : %d",
