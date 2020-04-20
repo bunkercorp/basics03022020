@@ -36,6 +36,7 @@ public class FractionNumber {
                 this.denominator * number.numerator);
     }
 
+    // найдено - не найдено, но нигде не применяется в твоем коде. Почему? Также, этот сервис должен, по хорошему, предоставлять класс, а не инстанции
     private void reduceFractionNumbers(long numerator, long denominator) { //found in the internet)
         int count = 0;
         for (int i = 2; i <= numerator; i++) {
@@ -47,6 +48,14 @@ public class FractionNumber {
                 }
             }
         }
+        /*
+        * this.denominator = denominator
+        * this.numerator = numerator
+        * if(count !=0){
+        * this.denominator/=count
+        * this.numerator/=count
+        * }
+        * */
         if (count != 0) {
             this.denominator = denominator / count;
             this.numerator = numerator / count;
