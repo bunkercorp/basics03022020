@@ -22,6 +22,7 @@ public class FractionNumber {
         return calculate(denominator, numerator % denominator);
     }
 
+    // ну уж нет. Сервис редюса должен был бы предоставлять сам класс, инстанциям этот метод ни к чему.
     private void reduce() {
         long calculate = calculate(numerator, denominator);
         numerator /= calculate;
@@ -35,6 +36,7 @@ public class FractionNumber {
     }
 
     public FractionNumber subtract(FractionNumber fractionNumber) {
+        // этот вот минус как-то сильно похож на плюс в методе add. Похоже на общую логику
         long resultNumerator = (numerator * fractionNumber.denominator) - (fractionNumber.numerator * denominator);
         long resultDenominator = denominator * fractionNumber.denominator;
         return new FractionNumber(resultNumerator, resultDenominator);
@@ -54,6 +56,7 @@ public class FractionNumber {
 
     @Override
     public String toString() {
+        // нуловым результат не будет вообще никогда. А вот по твоему ифу такого не скажешь
         String result = null;
 
         if (denominator == 1) {
