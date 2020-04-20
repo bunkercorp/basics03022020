@@ -10,7 +10,7 @@ public class FractionNumber {
         if (a < 0) {
             a *= -1;
         }
-
+//Math.abs(b) и не нужен этот иф
         if (b < 0) {
             b *= -1;
         }
@@ -46,7 +46,9 @@ public class FractionNumber {
         } else if (denominator > 0 && numerator != 0) {
             this.numerator = numerator / gcd(numerator, denominator);
             this.denominator = denominator / gcd(numerator, denominator);
-        } else if (denominator == 0) {
+        } else
+            // если этот иф поставить в самом начале, то будет более наглядно
+            if (denominator == 0) {
             throw new RuntimeException("Denominator equals to zero");
         }
 
@@ -54,11 +56,13 @@ public class FractionNumber {
 
     public String toString() {
         String fraction = "";
+        // this.numerator и всё
         if (FractionNumber.this.numerator < FractionNumber.this.denominator && FractionNumber.this.numerator > 0) {
             fraction = String.format("%d/%d", numerator, denominator);
         } else if (FractionNumber.this.numerator % FractionNumber.this.denominator == 0) {
             long result = numerator / denominator;
             fraction = String.format("%d",result);
+            // this.numerator % this.denominator != 0 просится в переменную, так как встречается не единожды
         } else if (FractionNumber.this.numerator > FractionNumber.this.denominator && FractionNumber.this.numerator % FractionNumber.this.denominator != 0) {
             long result = numerator / denominator;
             long result2 = numerator % denominator;
@@ -82,11 +86,13 @@ public class FractionNumber {
         if (b.numerator != 0) {
             return new FractionNumber(a.numerator * b.denominator, a.denominator * b.numerator);
         } else {
+            // не-а! это событие и так перехватит конструктор
             throw new RuntimeException("Denominator equals to zero");
         }
     }
 
     public static FractionNumber add(FractionNumber a, FractionNumber b) {
+    // однострочник это похвально но слегка нечитаемо. пара-тройка final long сущностей с читаемыми именами добавит самодокументированности
         return new FractionNumber((lcm(a.denominator, b.denominator) / a.denominator) * a.numerator + (lcm(a.denominator, b.denominator) / b.denominator) * b.numerator, lcm(a.denominator, b.denominator));
     }
 
