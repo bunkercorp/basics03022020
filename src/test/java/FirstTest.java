@@ -34,8 +34,7 @@ public class FirstTest {
         findElement("input#login-form-password").sendKeys("160686bd");
         findElement("input#login-form-submit").click();
         waitForElementVisibility("a#assign-to-me").click();
-        wait.until(ExpectedConditions.attributeContains())
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("span#assignee-val"), "Dmitriy Boyev"));
         String assignee = waitForElementVisibility("span#assignee-val").getText();
         Assert.assertEquals(assignee, "Dmitriy Boyev");
     }
