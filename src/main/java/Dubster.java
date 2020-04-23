@@ -29,16 +29,25 @@ Separate the words with a space.
 
 public class Dubster {
     public static String songDecoder(String song) {
+
         String oldSong = "";
         for (int i = 0; i < song.length(); i++) {
+           /*
+           * String window = song.substring(i, i+2)
+           * if(window.equals("WUB"))
+           * также, ArrayIndexOutOfBound не за горами при i > song.length() - 3
+           * */
+
             if (song.charAt(i) == 'W' && song.charAt(i + 1) == 'U'
                     && song.charAt(i + 2) == 'B') {
+                // StringBuilder как накопитель результата получше, так как не плодит "сиротские" строки в памяти
                 oldSong += " ";
                 i += 2;
             } else {
                 oldSong += song.charAt(i);
             }
         }
+        // можно было и в один цикл все уместить, на самом деле
         StringBuilder old = new StringBuilder(oldSong.trim());
         while (old.indexOf(" ") >= 1) {
             if (old.charAt(old.indexOf(" ") + 1) == ' ') {
