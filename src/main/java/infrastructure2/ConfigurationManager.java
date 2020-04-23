@@ -9,8 +9,10 @@ public class ConfigurationManager {
     private OS os;
 
     private ConfigurationManager() {
-        String browser = System.getenv("CM_BROWSER");
-        String os = System.getenv("CM_OS");
+        String browser = System.getenv("CM_BROWSER")!= null ?
+                System.getenv("CM_BROWSER"):"chrome";
+        String os = System.getenv("CM_OS") != null ?
+                System.getenv("CM_OS"):"windows";
         if (browser.contains("chrome"))
             this.browser = Browser.CHROME;
         else if (browser.contains("firefox"))

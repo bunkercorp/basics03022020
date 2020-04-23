@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 public class JadenTextTests {
 
+
     @Test
     public void test() {
         assertEquals("toJadenCase doesn't return a valide JadenCase String! try again please :)",
