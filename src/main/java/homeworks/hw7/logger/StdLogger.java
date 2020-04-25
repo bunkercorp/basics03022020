@@ -1,5 +1,6 @@
 package homeworks.hw7.logger;
 
+// final
 public class StdLogger extends Logger {
     private static StdLogger instance;
 

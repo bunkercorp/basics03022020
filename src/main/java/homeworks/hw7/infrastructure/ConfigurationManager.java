@@ -25,5 +25,6 @@ public class ConfigurationManager {
             this.browser = Browser.CHROME;
         if (browser.contains("firefox"))
             this.browser = Browser.FIREFOX;
+        // CM_OS ???
     }
 }
