@@ -23,6 +23,7 @@ public class JadenCase {
         } else {
             char[] array = phrase.toCharArray();
             for (int i = 0; i < array.length; i++) {
+               // а что если слова не разделены пробелами?
                 if (i == 0 || array[i - 1] == ' ' && i < array.length - 1)
                     array[i] = Character.toUpperCase(array[i]);
             }

@@ -32,6 +32,7 @@ public class SequenceSum {
         } else if (value == 0) {
             modeString = value + " = " + 0;
         } else
+            // i = 1 ? зачем суммировать заведомый ноль?
             for (int i = 0; i <= value; i++) {
                 sum += i;
                 if (i < value) {

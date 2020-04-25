@@ -25,6 +25,7 @@ public class NumberRotator {
                     number.substring(i + 1) +
                     number.charAt(i);
 
+            // два раза одно и то же вычисление
             if (Long.parseLong(number) > n) {
                 n = Long.parseLong(number);
             }
