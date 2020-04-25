@@ -15,6 +15,8 @@ public class FractionNumber {
         reduce();
     }
 
+    // нигде нет присваивания выхлопа этого метода.
+    // также, этой логике место в конструкторе
     private FractionNumber reduce() {
 
         Long num = numerator;
