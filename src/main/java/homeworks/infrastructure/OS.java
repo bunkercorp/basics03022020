@@ -9,7 +9,9 @@ public enum OS {
             return WINDOWS;
         } else if(os.startsWith("mac")){
             return MAC;
-        } else {
+        }
+        // freebsd ;)
+        else {
             return LINUX;
         }
 
