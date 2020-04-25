@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 //
 public class URL {
 
+    // зачем такая инициализация при живом конструкторе?
     private String protocol = null;
     private String logIn = null;
     private String passWord = null;
@@ -15,6 +16,7 @@ public class URL {
     private String param = null;
     private String fragment = null;
 
+    //private
     public URL(String protocol, String logIn, String passWord, String domName, int port, String path, String param, String fragment) {
         this.protocol = protocol;
         this.logIn = logIn;
@@ -27,7 +29,7 @@ public class URL {
     }
 
     public static class Composer {
-
+        // вот здесь более-менее оправдано
         private String protocol = null;
         private String logIn = null;
         private String passWord = null;
@@ -37,15 +39,17 @@ public class URL {
         private String param = null;
         private String fragment = null;
 
+        // arg? непонятно. Именуй более красноречиво.
         public Composer(String arg) {
             System.out.print("Composer(String) called. ");
             if (arg == null || arg.equals("")) {this.domName = arg;} else {
                 int port = -1;
+                // подобное лучше смотрится как private final static, так как по сути константа. Именование.
                 final String argRegEx = "((([\\w]|:|-){1,63})\\.){2,127}";
                 boolean DomNameValid = arg.length() <= 253 && arg.concat(".").matches(argRegEx);
 
                 if (DomNameValid) {
-
+                    // с большой буквы  - классы \ интерфейсы \ перечисления
                     final String ThreeDigits = "([0-9]{1,3})";//part of IP
                     final String SixDigits = "(:([0-9]{1,6}))?";//port
                     final String LooksLikeIP = ThreeDigits + "\\." + ThreeDigits + "\\." + ThreeDigits + "\\." + ThreeDigits + SixDigits;
@@ -206,6 +210,7 @@ public class URL {
                         res += keys[i] + "=" + ((!values[i].equals(Character.toString((char) 94))) ? values[i] : "") + separator;
                     } else {
                         res = "-1";
+                        // throw
                         System.out.println("Error: invalid query");
                         break;
                     }
@@ -216,6 +221,7 @@ public class URL {
 
         public Composer params(Map<String, String> arg) {
             System.out.print("Query(Map) called. ");
+            // много раз видел эту регулярку.
             final String argRegEx = "^/?(([\\w]|-|_|~|!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|=|@){1,127})/?";
             String res = "";
             char separator = '&';
@@ -224,6 +230,7 @@ public class URL {
                     res += item.getKey() + "=" + ((item.getValue() !=null &&  !item.getValue().equals("")) ? item.getValue() : "") + separator;
                 } else {
                     res = "-1";
+                    // throw
                     System.out.println("Error: invalid query");
                     break;
                 }
@@ -238,6 +245,7 @@ public class URL {
             if (arg != null && arg.matches(argRegEx)) this.logIn = arg;
             else {
                 this.logIn = "-1";
+                // throw
                 System.out.println("Error: Invalid User Name");
             }
             return this;
@@ -254,6 +262,7 @@ public class URL {
             } else {
                 this.logIn = "-1";
                 this.passWord = "-1";
+             // throw
                 System.out.println("Error: Invalid User Name or PassWord");
             }
             return this;
@@ -265,6 +274,7 @@ public class URL {
             if (arg != null && arg.matches(argRegEx)) this.fragment = (arg.charAt(0) != '#') ? arg : arg.substring(1);
             else {
                 this.fragment = "-1";
+                // throw
                 System.out.println("Error: Invalid fragment");
             }
             return this;
@@ -298,6 +308,7 @@ public class URL {
     @Override
     public String toString() {
         String str = "";
+      // совсем некрасиво. Стринг формат
         str = this.protocol + ":" + ((this.domName!=null && !this.domName.equals("")) ? "//" : "")
                 + ((this.logIn != null) ? this.logIn + ((this.passWord != null) ? ":" + ((this.passWord != "-1") ? "PassWord" : "-1") : "") + "@" : "")
                 + ((this.domName!=null) ? ( this.domName + ((this.port != 80) ? ":" + this.port : "")) : (""))
