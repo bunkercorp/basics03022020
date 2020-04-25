@@ -3,6 +3,7 @@ package homeworks.hw3.PackageLogger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// final
 public class StdLogger implements Logger {
     private static StdLogger instance;
 
