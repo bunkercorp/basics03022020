@@ -2,7 +2,7 @@ package logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+// final
 public class StdLogger extends Logger {
     private static StdLogger instance;
 

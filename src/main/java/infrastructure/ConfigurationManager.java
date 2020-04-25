@@ -11,6 +11,7 @@ public class ConfigurationManager {
     private Browser browser;
 
     private ConfigurationManager() {
+    // CM_OS, CM_BROWSER должны были анализироваться где-то тут, по логике этого класса
         os = getOs();
         browser = getBrowser();
     }
@@ -24,14 +25,17 @@ public class ConfigurationManager {
 
     private OS getOs() {
         log.log("OS method");
+        // this.os , не?
         return OS.current();
     }
 
     private Browser getBrowser() {
         log.log("browser method");
+        // this.browser , не?
         return Browser.current();
     }
 
+    // надо полагать, это для дебага
     @Override
     public String toString() {
         return "ConfigurationManager{" +

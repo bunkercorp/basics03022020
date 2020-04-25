@@ -4,6 +4,8 @@ public enum Browser {
     FIREFOX, CHROME;
 
     static Browser current() {
+        // вижу дублированный код
+        // и да, Browser сам не решает, решает конфиг менеджер
         if (System.getenv("CM_BROWSER").toLowerCase().contains("firefox")) {
             return FIREFOX;
         }
