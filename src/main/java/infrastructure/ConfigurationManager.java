@@ -7,8 +7,9 @@ public class ConfigurationManager {
     private static Browser br;
 
     private ConfigurationManager() {
-        os = OS.current();
-        br = Browser.getBrowser();
+     // а вот и нет! конфиг менеджер сам должен взять переменные окружения и принять решение, основываясь на них.
+       os = OS.current();
+       br = Browser.getBrowser();
     }
 
     public static ConfigurationManager getInstance() {

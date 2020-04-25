@@ -11,6 +11,7 @@ public enum Browser {
         }
         return CHROME;
     }
+    // многовато чести, как по мне
     private static boolean isChrome(String str) {
 
         return (str.contains("CHROME"));
