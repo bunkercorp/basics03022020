@@ -8,6 +8,7 @@ public class ConfigurationManager {
 
     private ConfigurationManager() {
         this.os = OS.current();
+        // свич-кейс?
         this.browser = (System.getenv("CM_BROWSER").toLowerCase().contains("chrome")) ? Browser.CHROME :
                 (System.getenv("CM_BROWSER").toLowerCase().contains("firefox")) ? Browser.FIREFOX :
                         null;

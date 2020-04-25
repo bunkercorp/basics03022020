@@ -3,7 +3,9 @@ package logger;
 import java.time.format.DateTimeFormatter;
 
 public final class StdLogger extends Logger {
+   // ему место в родителе, кмк
     int counter;
+
     private static StdLogger instance;
 
     private StdLogger() {

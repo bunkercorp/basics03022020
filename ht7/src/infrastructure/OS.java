@@ -7,6 +7,7 @@ enum OS {
 
     public static OS current(){
         String osName = System.getProperty("os.name").toLowerCase();
+       // это вряд ли
         if (osName == null) throw new RuntimeException ("os.name not found"); else
         if (osName.startsWith("windows")) return OS.WINDOWS; else
         if ((osName.indexOf("nux") >= 0) ||
