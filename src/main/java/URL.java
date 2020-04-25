@@ -10,6 +10,7 @@ public class URL {
     private String authority;
     private String fragment;
 
+    // static, так как это константы на черный день
     private int defaultHttpPort = 80;
     private int defaultHttpsPort = 443;
 
@@ -29,12 +30,14 @@ public class URL {
         private boolean protocol_build;
         private int port_build = 0;
         private String path_build = null;
+        // Map<String, String> ???
         private String param_build = null;
         private String authority_build = null;
         private String fragment_build = null;
 
 
         public Composer(String domain) {
+          // null?
             if (!domain.equals(""))
                 this.domain_build = domain;
             else
@@ -42,6 +45,7 @@ public class URL {
         }
 
         public Composer isSecure(boolean protocol) {
+            // this.isSecure_build чуть более читаемо
             this.protocol_build = protocol;
             return this;
         }
@@ -89,7 +93,7 @@ public class URL {
         public Composer setPath(Collection<String> paths) {
             StringBuilder stringBuilder = new StringBuilder();
             int count = 0;
-
+            // ну вот, 15 строк копипаста....
             if (this.path_build == null) {
                 for (String path : paths) {
                     if (!path.equals("")) {
@@ -191,6 +195,7 @@ public class URL {
         public Composer setFragment(String fragment) {
             if (this.fragment_build == null) {
                 if (!fragment.equals("")) {
+                    // this.fragment_build = fragment.substring(fragment.startsWith("#") ? 1 : 0)
                     if (!fragment.startsWith("#"))
                         this.fragment_build = fragment;
                     else
@@ -204,9 +209,14 @@ public class URL {
         public URL compose() {
             String DOMAIN_NAME_PATTERN = "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$";
             if (this.domain_build != null) {
+                // это можно было сделать сразу в конструкторе
                 if (!this.domain_build.matches(DOMAIN_NAME_PATTERN))
                     throw new IllegalArgumentException("Wrong domain");
             }
+    /*
+    if(this.port_build == 0)
+    this.port_build = this.protocol_build ? 443 : 80;
+    */
 
             if (this.port_build == 0 & !this.protocol_build)
                 this.port_build = 80;
@@ -216,6 +226,8 @@ public class URL {
             String PATH_NAME_PATTERN = "[a-zA-Z0-9-._]*";
             if (this.path_build != null) {
                 if (!this.path_build.endsWith("/")) {
+                    // мне идея подсказывает, что для твоих целей достаточно String[]
+                    // String[] listPaths = this.path_build.split("/");
                     List<String> listPaths = Arrays.asList(this.path_build.split("/"));
                     for (String path : listPaths) {
                         if (!path.equals("")) {
@@ -245,6 +257,7 @@ public class URL {
         }
 
         private String slashPath(String path) {
+            // path.split("/") ???
             String tempPath = path;
             if (path.startsWith("/") && path.endsWith("/"))
                 tempPath = path.substring(1, path.length() - 1);
@@ -260,6 +273,7 @@ public class URL {
 
     @Override
     public String toString() {
+        // String.format("http%s://", protocol ? "s" : "" )
         String result = protocol ? "https://" : "http://";
 
         if (authority != null)
