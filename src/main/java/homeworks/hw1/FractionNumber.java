@@ -10,11 +10,13 @@ public class FractionNumber {
         this.toSimple();
     } //constructor 1
 
+    // зачем столько конструкторов?
     public FractionNumber (long numerator){
         this.numerator = numerator;
         this.denominator = 1;
     } //constructor 2
 
+    // зачем столько конструкторов?
     public FractionNumber (){
         this.denominator = 1;
         this.numerator = 0;
@@ -25,6 +27,7 @@ public class FractionNumber {
         toCommonDenominator(this, arg);
         result.denominator = this.denominator;
         result.numerator = this.numerator + arg.numerator;
+    //
         result.toSimple();
         this.toSimple();
         arg.toSimple();
@@ -63,6 +66,7 @@ public class FractionNumber {
         String str = "";
         if (this.numerator == 0) str = "0"; else
         if (this.denominator == 1) str = String.format("%d", this.numerator); else
+            // (this.denominator != 1) & (this.numerator != 0) подсвечен идеей как всегда возвращающее true. зачем оно здесь? также, && а не &
         if ((this.denominator != 1) & (this.numerator != 0) & (this.numerator/this.denominator == 0)) str = String.format("%d/%d", this.numerator, this.denominator); else
         if (this.numerator/this.denominator != 0)
             str = String.format("%d %d/%d",
@@ -72,6 +76,7 @@ public class FractionNumber {
         return (str);
     }
 
+    // этой логике место в конструкторе
     private void toSimple() {
         if (this.denominator < 0) {this.numerator *= -1; this.denominator *= -1;}
         long greatest_common_factor = 1;
