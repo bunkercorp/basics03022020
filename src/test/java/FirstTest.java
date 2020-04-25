@@ -15,8 +15,8 @@ public class FirstTest {
     //final String binPath = String.format("%s/bin/chromedriver.exe", System.getProperty("user.dir"));
     //System.setProperty("webdriver.chrome.driver",binPath);
 
-    private static WebDriver driver = new ChromeDriver();
-    private static WebDriverWait wait = new WebDriverWait(driver, 10);
+    private static final WebDriver driver = new ChromeDriver();
+    private static final WebDriverWait wait = new WebDriverWait(driver, 10);
 
     public static WebElement findElement(String ccs) {
         return driver.findElement(By.cssSelector(ccs));
@@ -30,12 +30,14 @@ public class FirstTest {
     public void testBasic() throws InterruptedException {
         driver.get("https://jira.hillel.it/browse/AQA220-6");
         driver.manage().window().maximize();
-        waitForElementVisibility("input#login-form-username").sendKeys("The_Boyev");
-        findElement("input#login-form-password").sendKeys("160686bd");
+        waitForElementVisibility("input#login-form-username").sendKeys(System.getenv("LOGIN"));
+        findElement("input#login-form-password").sendKeys(System.getenv("PASSWORD"));
         findElement("input#login-form-submit").click();
         waitForElementVisibility("a#assign-to-me").click();
-        wait.until(ExpectedConditions.textToBe(By.cssSelector("span#assignee-val"), "Dmitriy Boyev"));
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("span#assignee-val"), System.getenv("NAME")));
         String assignee = waitForElementVisibility("span#assignee-val").getText();
-        Assert.assertEquals(assignee, "Dmitriy Boyev");
+        Assert.assertEquals(assignee,System.getenv("NAME"));
+        String textPopup = waitForElementVisibility("div.aui-message.closeable.aui-message-success.aui-will-close").getText();
+        Assert.assertTrue(textPopup.contains("has been assigned"));
     }
 }
