@@ -7,6 +7,7 @@ public class ConfigurationManager {
 
     public static ConfigurationManager getInstance() {
         if (instance == null)
+            // instance = new ConfigurationManager();
             return new ConfigurationManager();
         return instance;
     }
@@ -25,6 +26,7 @@ public class ConfigurationManager {
             this.browser = Browser.CHROME;
         if (browser.contains("firefox"))
             this.browser = Browser.FIREFOX;
+        // где обработка CM_OS?
     }
 
 }
