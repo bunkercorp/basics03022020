@@ -13,7 +13,6 @@ public final class StdLogger extends Logger{
 
     private StdLogger() {}
 
-    // твоя архитектура позволяет StdLogger-у не знать о существовании logPrefix()
     @Override
     public void log(String text){
         System.out.printf("%s%s\n", logPrefix(), text);

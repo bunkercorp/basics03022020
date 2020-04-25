@@ -11,7 +11,6 @@ public abstract class Logger {
         System.out.printf("%s%s\n", logPrefix(), text);
     }
 
-    // private , раз на то пошло
     protected String logPrefix() {
         String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
         String dateStr = new SimpleDateFormat("HH:mm:ss:SSS").format(new Date());
