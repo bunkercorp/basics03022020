@@ -21,6 +21,7 @@ public class StdLogger implements Logger {
     public void log(String message) {
         final String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
         String dateStr = new SimpleDateFormat("HH:MM:ss:SSS").format(new Date());
+        // err?
         System.err.println(++counter + " " + dateStr + "[" + methodName + "]" + " " + message);
     }
 }
