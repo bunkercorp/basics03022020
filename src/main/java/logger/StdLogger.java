@@ -7,6 +7,7 @@ public final class StdLogger implements Logger {
 
     private static StdLogger instance;
     private int counter =1;
+    // super()?
     private StdLogger(){
         super();
     }
