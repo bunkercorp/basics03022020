@@ -12,7 +12,8 @@ public class ConfigurationManager {
         return instance;
     }
     private ConfigurationManager(){
-
+        // а зачем ты дефолтишь операционку к линуксу? нулловое значение переменной окружения говорит только о том, что оная переменная не выставлена, что не является линукс специфичным поведением
+        // также, этот код хорошо бы смотрелся как какой-то метод в OS, принимающий строку и работающий аналогично current. Здесь ему не совсем место.
         String invOs = (System.getenv("CM_OS") != null ? System.getenv("CM_OS") : "linux").toLowerCase();
         if(invOs.contains("windows")) os = OS.WINDOWS;
         if(invOs.contains("linux")) os = OS.LINUX;

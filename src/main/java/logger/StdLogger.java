@@ -19,6 +19,7 @@ public final class StdLogger extends Logger {
     @Override
     public void log(String msg){
         String caller = Thread.currentThread().getStackTrace()[2].getMethodName();
+        // MM тебя не смутило? =)
         String now =new SimpleDateFormat("HH:MM:ss:SSS").format(new Date());
         System.out.printf("%d) %s [%s]: %s\n",counter++,now.toString() ,caller, msg);
 
