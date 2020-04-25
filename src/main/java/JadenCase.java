@@ -22,6 +22,7 @@ public class JadenCase {
         String[] words = phrase.split(" ");
         String result = "";
         for(int i = 0; i<words.length; i++) {
+         // String.format
             words[i] = words[i].substring(0,1).toUpperCase() + words[i].substring(1, words[i].length());
             result = result + words[i];
             if (i < words.length - 1) {

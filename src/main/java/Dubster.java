@@ -36,6 +36,7 @@ public class Dubster {
                     sb.append(' ');
                 }
                 i = i + 2;
+                    // не имеет смысла, о чем идея даже подсвечивает.
                 continue;
             } else {
                 sb.append(song.charAt(i));

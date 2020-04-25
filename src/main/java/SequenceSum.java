@@ -28,8 +28,10 @@ public class SequenceSum {
         if(value < 0) {
             return value + " < 0";
         }
+     // StringBuilder как хранилище результата получше
         String result = "";
         int sum = 0;
+      // зачем суммировать заведомый ноль? i = 1
         for(int i=0; i<=value; i++){
             if(i == 0){
                 result = "0";
