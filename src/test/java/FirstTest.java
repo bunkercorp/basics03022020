@@ -26,7 +26,7 @@ public class FirstTest {
 
         String strLogin = System.getProperty("login");
         String strPass = System.getProperty("pass");
-        String strExpectedName = System.getProperty("expectedName");
+        String strExpectedName = System.getProperty("expectedName").replace("\"","");
 
         WebDriver browser = new ChromeDriver();
         final Wait<WebDriver> wait = new WebDriverWait(browser, 5).withMessage("Element was not found");
