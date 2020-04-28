@@ -51,12 +51,12 @@ public class FirstTest {
         waitForElementVisibility("span#priority-val").click();
         List<WebElement> listOfPriority = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("option.imagebacked")));
         findElement("span.icon.aui-ss-icon.noloading.drop-menu").click();
-//        for (WebElement webElement : listOfPriority) {
-//            System.out.println(webElement.getAttribute("innerText").trim());
-//        }
+        for (WebElement webElement : listOfPriority) {
+            System.out.println(webElement.getAttribute("innerText").trim());
+        }
 
         String generatedString = RandomStringUtils.randomAlphanumeric(5);
-        //Thread.sleep(2000);
+
         try {
             if (findElement("span#labels-72354-value").isDisplayed()) {
                 waitForElementVisibility("span#labels-72354-value").click();
@@ -88,6 +88,15 @@ public class FirstTest {
 
         }
 
+        findElement("div em").click();
+        waitForElementVisibility("iframe#mce_0_ifr");
+        driver.switchTo().frame("mce_0_ifr");
+        waitForElementVisibility("body#tinymce p").click();
+        String description = "Мені тринадцятий минало. Я пас ягнята за селом.";
+        waitForElementVisibility("body#tinymce p").sendKeys(description);
+        driver.switchTo().defaultContent();
+        findElement("button[type='submit']").click();
+        Assert.assertEquals(waitForElementVisibility("div#description-val p").getText(), description);
     }
 }
 
