@@ -34,6 +34,10 @@ public class FirstTest {
 //        Assert.assertEquals(someName.getText(),"Kate Afanasieva");
         wdWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"aui-flag-container\"]/div/div"))).getText();
         Assert.assertEquals("AQA220-4 has been assigned.", wdWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"aui-flag-container\"]/div/div"))).getText());
+        WebElement assignee = browser.findElement(By.xpath("//*[@id=\"assignee-val\"]/span"));
+        assignee.click();
+        wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"assignee-field\"]\n"))).sendKeys(Keys.BACK_SPACE);
+        browser.findElement(By.xpath("//*[@id=\"assignee-form\"]/div[2]/button[1]")).click();
 
 //        Thread.sleep(5000);
 //        browser.quit();
@@ -55,7 +59,6 @@ public class FirstTest {
         List<WebElement> listPrio = wdWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("option.imagebacked")));
         for (int i = 0; i < listPrio.size(); i++) {
             System.out.println(listPrio.get(i).getAttribute("label"));
-
         }
         browser.findElement(By.cssSelector("strong.name")).click();
 
