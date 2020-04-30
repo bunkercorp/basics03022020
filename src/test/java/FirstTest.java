@@ -24,7 +24,7 @@ public class FirstTest {
         Assert.assertEquals(str,"Ipsum");
     }*/
 
-    @Test
+    //@Test
     public void testAssignMyTask() throws InterruptedException {
         final String binPath = String.format("%s/.idea/bin/chromedriver.exe",System.getProperty("user.dir"));
 
@@ -58,7 +58,7 @@ public class FirstTest {
         //Thread.sleep(3000);
         browser.quit();
     }
-    @Test
+    //@Test
     public void test2703() throws InterruptedException {
         final String binPath = String.format("%s/.idea/bin/chromedriver.exe",System.getProperty("user.dir"));
 
@@ -121,5 +121,69 @@ public class FirstTest {
         Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#description-val p"))).getText(),descryptionString);
 
         browser.quit();
+    }
+
+    @Test
+    public void testConfluence() throws InterruptedException {
+        final String binPath = String.format("%s/.idea/bin/chromedriver.exe", System.getProperty("user.dir"));
+
+        System.setProperty("webdriver.chrome.driver", binPath);
+
+        String strLogin = System.getProperty("login");
+        String strPass = System.getProperty("pass");
+        String strExpectedName = System.getProperty("expectedName").replace("\"", "");
+
+        WebDriver browser = new ChromeDriver();
+        final Wait<WebDriver> wait = new WebDriverWait(browser, 5).withMessage("Element was not found");
+        browser.manage().window().maximize();
+        browser.get("https://jira.hillel.it/");
+/*
+        browser.findElement(By.xpath("//*[@id=\"login-form-username\"]")).sendKeys(strLogin);
+        browser.findElement(By.xpath("//*[@id=\"login-form-password\"]")).sendKeys(strPass);
+        browser.findElement(By.xpath("//*[@id=\"login\"]")).click();
+
+ */
+
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("activity-stream-show-more")));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@aria-controls=\"app-switcher\"]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()=\"Confluence\"]"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"os_username\"]"))).sendKeys(strLogin);
+        browser.findElement(By.xpath("//*[@id=\"os_password\"]")).sendKeys(strPass);
+        browser.findElement(By.xpath("//*[@id=\"loginButton\"]")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-menu-link"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("view-user-profile-link"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.content-navigation a"))).click();
+        final String phone="555-55-55";
+        final String im="333-33-33";
+        final String web="web.saita.net";
+        final String info="meni 13 minalo";
+        final String position="главнй куда пошлют";
+        final String department="razrabotka razrabotok";
+        final String location="samoizolacia";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-phone"))).sendKeys(phone);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-im"))).sendKeys(im);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-website"))).sendKeys(web);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea#personalInformation"))).sendKeys(info);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-position"))).sendKeys(position);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-department"))).sendKeys(department);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-location"))).sendKeys(location);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("confirm"))).click();
+
+
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-phone"))).getText(),phone);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-im"))).getText(),im);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-website"))).getText(),web);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea#personalInformation"))).getText(),info);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-position"))).getText(),position);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-department"))).getText(),department);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-location"))).getText(),location);
+
+        browser.close();
+
     }
 }
