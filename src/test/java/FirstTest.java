@@ -80,6 +80,41 @@ public class FirstTest {
 //        Thread.sleep(5000);
 //        browser.quit();
     }
+    @Test
+    public void testBasic3() throws InterruptedException {
+        WebDriver browser = giveMeBrowser("chrome");
+        browser.get("https://jira.hillel.it/secure/Dashboard.jspa");
+        WebDriverWait wdWait = new WebDriverWait(browser,10);
+        WebElement username = browser.findElement(By.id("login-form-username"));
+        WebElement password = browser.findElement(By.id("login-form-password"));
+        username.sendKeys(System.getProperty("username"));
+        password.sendKeys(System.getProperty("password"));
+        browser.findElement(By.id("login")).click();
+//        wdWait.until(ExpectedConditions.presenceOfElementLocated(By.id("activity-stream-show-more")));
+        Thread.sleep(5000);
+        browser.findElement(By.xpath("//*[@id=\"header\"]/nav/div/div[1]/a/span")).click();
+        browser.findElement(By.xpath("//*[@id=\"app-switcher\"]/div/ul/li[2]/a")).click();
+        Thread.sleep(2500);
+        WebElement username2 = browser.findElement(By.id("os_username"));
+        WebElement password2 = browser.findElement(By.id("os_password"));
+        username2.sendKeys("catharine.afanasyeva");
+        password2.sendKeys("catharine");
+        browser.findElement(By.id("loginButton")).click();
+        Thread.sleep(2500);
+        browser.findElement(By.id("user-menu-link")).click();
+        browser.findElement(By.id("view-user-profile-link")).click();
+        browser.findElement(By.cssSelector("span.aui-icon.aui-icon-small.aui-iconfont-edit")).click();
+
+
+
+
+
+//        Thread.sleep(5000);
+//        browser.quit();
+    }
+
+
+
 
     static WebDriver giveMeBrowser(String browserName) throws InterruptedException {
         WebDriver browser;
