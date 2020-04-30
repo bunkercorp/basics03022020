@@ -97,17 +97,21 @@ public class FirstTest {
         Thread.sleep(2500);
         WebElement username2 = browser.findElement(By.id("os_username"));
         WebElement password2 = browser.findElement(By.id("os_password"));
-        username2.sendKeys("catharine.afanasyeva");
-        password2.sendKeys("catharine");
+        username.sendKeys(System.getProperty("username"));
+        password.sendKeys(System.getProperty("password"));
         browser.findElement(By.id("loginButton")).click();
         Thread.sleep(2500);
         browser.findElement(By.id("user-menu-link")).click();
         browser.findElement(By.id("view-user-profile-link")).click();
         browser.findElement(By.cssSelector("span.aui-icon.aui-icon-small.aui-iconfont-edit")).click();
-
-
-
-
+        browser.findElement(By.id("userparam-phone")).sendKeys("066-000-00-00");
+        browser.findElement(By.id("userparam-im")).sendKeys("blabla");
+        browser.findElement(By.id("userparam-website")).sendKeys("hillel.com");
+        browser.findElement(By.id("personalInformation")).sendKeys("laugh out loud");
+        browser.findElement(By.id("userparam-position")).sendKeys("position");
+        browser.findElement(By.id("userparam-department")).sendKeys("department");
+        browser.findElement(By.id("userparam-location")).sendKeys("location");
+        browser.findElement(By.id("confirm")).click();
 
 //        Thread.sleep(5000);
 //        browser.quit();
