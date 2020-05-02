@@ -40,7 +40,8 @@ public class Dubster {
 
             if (song.charAt(i) == 'W' && song.charAt(i + 1) == 'U'
                     && song.charAt(i + 2) == 'B') {
-                // StringBuilder как накопитель результата получше, так как не плодит "сиротские" строки в памяти
+                // StringBuilder как накопитель результата получше, так как не плодит "сиротские"
+                // строки в памяти
                 oldSong += " ";
                 i += 2;
             } else {
