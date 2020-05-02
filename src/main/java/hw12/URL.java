@@ -1,9 +1,10 @@
 package hw12;
 
 import hw12.urlExeption.UrlException;
+import hw12.urlHelpers.UrlHelpers;
+import hw12.urlHelpers.UrlValidation;
 
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,7 @@ public class URL {
         public Composer path(String... path) throws UrlException, UnsupportedEncodingException {
             this.path = "";
             for (String a : path) {
-                a = URLEncoder.encode(a, "UTF-8").replace("+", "%20");
+                a = UrlHelpers.removeSpacesInPath(a);
                 if (UrlValidation.FORBIDDEN_PATH.matcher(a).find())
                     throw new UrlException("Invalid path :" + path);
                 else
@@ -87,7 +88,7 @@ public class URL {
 
         public Composer path(List<String> path) throws UrlException, UnsupportedEncodingException {
             for (String a : path) {
-                a = URLEncoder.encode(a, "UTF-8").replace("+", "%20");
+                a = UrlHelpers.removeSpacesInPath(a);
                 if (UrlValidation.FORBIDDEN_PATH.matcher(a).find())
                     throw new UrlException("Invalid path :" + path);
                 else
