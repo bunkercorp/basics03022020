@@ -31,7 +31,7 @@ public class EditProfileTest extends InfrastructureSetup {
         LoginJiraPage loginInJira = new LoginJiraPage(driver);
         loginInJira.pathToConfluence();
         LoginConfluencePage loginInConfluence = new LoginConfluencePage(driver);
-        loginInConfluence.loginInConfluence();
+        loginInConfluence.loginInConfluence(System.getenv("LOGIN"), System.getenv("PASSWORD"));
         ConfluenceMainPage confluenceMain = new ConfluenceMainPage(driver);
         confluenceMain.accessProfile();
         ProfileConfluencePage profile = new ProfileConfluencePage(driver);

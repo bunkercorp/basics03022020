@@ -21,9 +21,7 @@ public class LoginJiraPage {
     //public static String url = "https://jira.hillel.it/secure/Dashboard.jspa";
 
 
-    public void login() {
-        String login = "The_Boyev";
-        String password = "160686bd";
+    public void login(String login, String password) {
         driver.findElement(inputLogin).sendKeys(login);
         driver.findElement(inputPassword).sendKeys(password);
         driver.findElement(submitButton).click();

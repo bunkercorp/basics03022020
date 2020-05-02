@@ -14,9 +14,7 @@ public class LoginConfluencePage {
         this.driver = driver;
     }
 
-    public void loginInConfluence() {
-        String login = "The_Boyev";
-        String password = "160686bd";
+    public void loginInConfluence(String login, String password) {
         driver.findElement(inputLoginConfl).sendKeys(login);
         driver.findElement(inputPasswordConfl).sendKeys(password);
         driver.findElement(signInButtonConfl).click();
