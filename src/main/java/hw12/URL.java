@@ -107,7 +107,7 @@ public class URL {
         public Composer param(String key, String value) throws UrlException {
             if (key == null || value == null)
                 throw new UrlException("Invalid key or value ");
-            this.param = "?" + key + "=" + value;
+            this.param = String.format("?%s=%s", key, value);
             return this;
         }
 
@@ -144,10 +144,6 @@ public class URL {
         }
     }
 
-    public boolean isSecure() {
-        return isSecure;
-    }
-
     public String getHost() {
         return host;
     }
@@ -156,35 +152,19 @@ public class URL {
         return port;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public String getParam() {
-        return param;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public String getFragment() {
-        return fragment;
-    }
-
     @Override
     public String toString() {
-        String url = isSecure ? "https://" : "http://";
+        String url = String.format("http%s://", isSecure ? "s" : "");
         if (authority != null)
-            url += authority + host + ":" + port;
+            url += String.format("%s%s:%d", authority, host, port);
         else
-            url += host + ":" + port;
+            url += String.format("%s:%s", host, port);
         if (path != null)
             url += path;
         if (param != null)
             url += param;
         if (fragment != null)
-            url += param;
+            url += fragment;
         return url;
     }
 }
