@@ -22,7 +22,7 @@ public class EditProfileTest extends InfrastructureSetup {
 
     @BeforeClass
     public void setUp() {
-        driver = runTest.setDriver("chrome", "https://jira.hillel.it/secure/Dashboard.jspa");
+        driver = runTest.setDriver("firefox", "https://jira.hillel.it/secure/Dashboard.jspa");
     }
 
 

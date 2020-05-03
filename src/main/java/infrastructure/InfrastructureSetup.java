@@ -36,7 +36,7 @@ public class InfrastructureSetup {
     }
 
     private static WebDriver initFirefoxDriver(String appURL) {
-        System.out.println("Launching Firefox browser..");
+        System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.navigate().to(appURL);
