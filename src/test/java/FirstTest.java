@@ -164,24 +164,24 @@ public class FirstTest {
         final String position="главнй куда пошлют";
         final String department="razrabotka razrabotok";
         final String location="samoizolacia";
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-phone"))).sendKeys(phone);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-im"))).sendKeys(im);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-website"))).sendKeys(web);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea#personalInformation"))).sendKeys(info);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-position"))).sendKeys(position);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-department"))).sendKeys(department);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-location"))).sendKeys(location);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-phone"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),phone);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-im"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),im);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-website"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),web);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea#personalInformation"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),info);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-position"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),position);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-department"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),department);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-location"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),location);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("confirm"))).click();
 
 
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-phone"))).getText(),phone);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-im"))).getText(),im);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-website"))).getText(),web);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea#personalInformation"))).getText(),info);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-position"))).getText(),position);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-department"))).getText(),department);
-        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#userparam-location"))).getText(),location);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-phone"))).getText(),phone);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-im"))).getText(),im);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-website"))).getText(),"http://"+web);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#profile-about-me-content p"))).getText(),info);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-position"))).getText(),position);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-department"))).getText(),department);
+        Assert.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span#userparam-location"))).getText(),location);
 
         browser.close();
 
