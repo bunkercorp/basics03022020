@@ -25,7 +25,7 @@ public class ProfileConfluencePage {
         this.driver = driver;
     }
 
-    public void clickEditProfileButton() {
+    public void commenceEditProfile() {
         driver.findElement(editProfileButton).click();
     }
 
