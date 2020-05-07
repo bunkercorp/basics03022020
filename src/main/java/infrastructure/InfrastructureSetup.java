@@ -30,8 +30,8 @@ public class InfrastructureSetup {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.navigate().to(appURL);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         return driver;
     }
 
@@ -40,8 +40,8 @@ public class InfrastructureSetup {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.navigate().to(appURL);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         return driver;
     }
 }
