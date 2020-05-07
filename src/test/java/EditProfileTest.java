@@ -13,41 +13,39 @@ import org.testng.annotations.Test;
 public class EditProfileTest extends InfrastructureSetup {
     private WebDriver driver;
     InfrastructureSetup runTest = new InfrastructureSetup();
-    final String bio = "Боритесь та поборете";
-    final String phone = "555-555-555";
-    final String webSite = "http://taras.grygorovych.ua";
-    final String position = "Проти журби у функцiях";
-    final String department = "QA";
-    final String location = "Батькiвщина";
+    LoginJiraPage loginInJira;
+    LoginConfluencePage loginInConfluence;
+    ConfluenceMainPage confluenceMain;
 
     @BeforeClass
     public void setUp() {
-        driver = runTest.setDriver("firefox", "https://jira.hillel.it/secure/Dashboard.jspa");
+        driver = runTest.setDriver("chrome", "https://jira.hillel.it/secure/Dashboard.jspa");
+        loginInJira = new LoginJiraPage(driver);
+        loginInConfluence = new LoginConfluencePage(driver);
+        confluenceMain = new ConfluenceMainPage(driver);
     }
 
 
     @Test
     public void editProfileTest() {
-        LoginJiraPage loginInJira = new LoginJiraPage(driver);
-        loginInJira.pathToConfluence();
-        LoginConfluencePage loginInConfluence = new LoginConfluencePage(driver);
-        loginInConfluence.loginInConfluence(System.getenv("LOGIN"), System.getenv("PASSWORD"));
-        ConfluenceMainPage confluenceMain = new ConfluenceMainPage(driver);
-        confluenceMain.accessProfile();
+
         ProfileConfluencePage profile = new ProfileConfluencePage(driver);
+        loginInJira.pathToConfluence();
+        loginInConfluence.loginInConfluence(System.getenv("LOGIN"), System.getenv("PASSWORD"));
+        confluenceMain.accessProfile();
         profile.clickEditProfileButton();
-        profile.editBio(bio);
-        profile.editDepartment(department);
-        profile.editLocation(location);
-        profile.editPhone(phone);
-        profile.editPosition(position);
-        profile.editWebSite(webSite);
+        profile.editBio(profile.getBio());
+        profile.editDepartment(profile.getDepartment());
+        profile.editLocation(profile.getLocation());
+        profile.editPhone(profile.getPhone());
+        profile.editPosition(profile.getPosition());
+        profile.editWebSite(profile.getWebSite());
         profile.clickSaveChangesButton();
-        Assert.assertEquals(driver.findElement(By.cssSelector("#profile-about-me-content")).getText(), bio);
-        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-phone")).getText(), phone);
-        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-website")).getText(), webSite);
-        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-position")).getText(), position);
-        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-location")).getText(), location);
-        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-department")).getText(), department);
+        Assert.assertEquals(driver.findElement(By.cssSelector("#profile-about-me-content")).getText(), profile.getBio());
+        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-phone")).getText(), profile.getPhone());
+        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-website")).getText(), profile.getWebSite());
+        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-position")).getText(), profile.getPosition());
+        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-location")).getText(), profile.getLocation());
+        Assert.assertEquals(driver.findElement(By.cssSelector("#userparam-department")).getText(), profile.getDepartment());
     }
 }

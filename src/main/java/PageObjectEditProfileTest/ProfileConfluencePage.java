@@ -14,6 +14,13 @@ public class ProfileConfluencePage {
     private final By locationInput = By.cssSelector("#userparam-location");
     private final By saveChangesButton = By.cssSelector("#confirm");
 
+    final String bio = "Боритесь та поборете";
+    final String phone = "555-555-555";
+    final String webSite = "http://taras.grygorovych.ua";
+    final String position = "Проти журби у функцiях";
+    final String department = "QA";
+    final String location = "Батькiвщина";
+
     public ProfileConfluencePage(WebDriver driver) {
         this.driver = driver;
     }
@@ -54,6 +61,30 @@ public class ProfileConfluencePage {
 
     public void clickSaveChangesButton(){
         driver.findElement(saveChangesButton).click();
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getWebSite() {
+        return webSite;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
 
