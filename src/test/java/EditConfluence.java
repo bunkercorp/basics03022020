@@ -9,10 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class EditConfluence extends Main {
+    WebDriver browser = giveMeBrowser("chrome");
+
+    public EditConfluence() throws InterruptedException {
+    }
 
     @Test
     public void testBasic3() throws InterruptedException {
-        WebDriver browser = giveMeBrowser("chrome");
+
         browser.get("https://jira.hillel.it/secure/Dashboard.jspa");
         WebDriverWait wdWait = new WebDriverWait(browser,10);
         WebElement username = browser.findElement(By.id("login-form-username"));

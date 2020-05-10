@@ -14,12 +14,17 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FirstTest extends Main {
+    WebDriver browser = giveMeBrowser("chrome");
+
+    public FirstTest() throws InterruptedException {
+    }
+
     @Test
     public void testBasic() throws InterruptedException {
 //        String str = System.getProperty("lorem");
 //        System.out.println(str);
 //        Assert.assertEquals(str,"Ipsum");
-        WebDriver browser = giveMeBrowser("chrome");
+
         browser.get("https://jira.hillel.it/browse/AQA220-4");
         WebElement username = browser.findElement(By.id("login-form-username"));
         username.sendKeys(System.getProperty("username"));
