@@ -3,7 +3,6 @@ package JiraIssue;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -60,6 +59,7 @@ public class JiraIssue {
     private final String[] keyValue = parseResponseBody();
 
     private String inProject() throws IOException {
+        //проект по дефолту
         if (!keyValue[1].trim().equals("AQA220")) {
             keyValue[1] = "AQA220";
         }
@@ -76,7 +76,12 @@ public class JiraIssue {
     }
 
     private String withPriority() throws IOException {
-        return keyValue[9].trim();
+        String priority = keyValue[9];
+        List<String> priorities = Arrays.asList("Lowest", "Low", "Medium", "Normal", "High", "Highest", "Blocker", "Critial", "Очень срочно");
+        if (!priorities.contains(priority)) {
+            throw new IllegalArgumentException("not valid type of ticket");
+        }
+        return priority;
     }
 
     private Collection<String> withLabels() throws IOException {
@@ -87,12 +92,10 @@ public class JiraIssue {
     }
 
     private String withDescription() throws IOException {
-        String[] keyValue = parseResponseBody();
         return keyValue[7];
     }
 
     private String withSummary() throws IOException {
-        String[] keyValue = parseResponseBody();
         return keyValue[5];
     }
 
@@ -174,12 +177,6 @@ public class JiraIssue {
                 throw new IllegalArgumentException(String.valueOf(result));
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        JiraIssue is = new JiraIssue();
-        System.out.println(Arrays.toString(parseResponseBody()));
-        is.create();
     }
 
 }
