@@ -1,5 +1,11 @@
 package JiraIssue;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class JiraIssue {
 
@@ -43,26 +46,20 @@ public class JiraIssue {
         return String.join("", result);
     }
 
+
     private static String[] parseResponseBody() throws IOException {
         String responseBody = getResponseBody().trim();
-        String[] parts = responseBody.split("<tbody>");
-        String shortenedResponse = "" + parts[1];
-        String[] parts2 = shortenedResponse.split("</tbody>");
-        String shortenedResponse2 = parts2[0] + "";
-        String dataForRequest = shortenedResponse2.replace(" class=\"confluenceTh\"", "").
-                replace(" class=\"confluenceTd\"", "").
-                replace("<tr>", "").
-                replace("</tr>", "").
-                replace("<th colspan=\"2\">Request data<br/><br/></th>", "").
-                replace("<td>", "").
-                replace("</td>", "\n").
-                replace(",", "");
+        Document doc = Jsoup.parse(responseBody);
+        Elements tableData = doc.select("td");
+        String dataForRequest = tableData.toString().replace("<td class=\"confluenceTd\">", "").
+                replace(",", "").
+                replace("</td>", "");
         return dataForRequest.split("\n");
     }
 
+    private final String[] keyValue = parseResponseBody();
 
     private String inProject() throws IOException {
-        String[] keyValue = parseResponseBody();
         if (!keyValue[1].trim().equals("AQA220")) {
             keyValue[1] = "AQA220";
         }
@@ -70,18 +67,19 @@ public class JiraIssue {
     }
 
     private String ofType() throws IOException {
-        String[] keyValue = parseResponseBody();
-        return keyValue[3].trim();
+        String taskType = keyValue[3];
+        List<String> types = Arrays.asList("Bug", "Task", "Improvement", "New Feature", "Epic");
+        if (!types.contains(taskType)) {
+            throw new IllegalArgumentException("not valid type of ticket");
+        }
+        return taskType;
     }
 
     private String withPriority() throws IOException {
-        String[] keyValue = parseResponseBody();
         return keyValue[9].trim();
     }
 
     private Collection<String> withLabels() throws IOException {
-
-        String[] keyValue = parseResponseBody();
         String[] labels = keyValue[11].split(" ");
         Collection<String> collection = new ArrayList<String>();
         Collections.addAll(collection, labels);
@@ -108,6 +106,7 @@ public class JiraIssue {
     public String getSummary() {
         return summary;
     }
+
     public String getProjectKey() {
         return projectKey;
     }
@@ -170,15 +169,17 @@ public class JiraIssue {
         String line;
         while ((line = br.readLine()) != null) {
             result.add(line);
-        }
-        if (responseCode != 201) {
-            throw new IllegalArgumentException(String.valueOf(result));
+            //для подстраховки
+            if (responseCode != 201) {
+                throw new IllegalArgumentException(String.valueOf(result));
+            }
         }
     }
 
     public static void main(String[] args) throws IOException {
         JiraIssue is = new JiraIssue();
-        System.out.println(is.labels);
+        System.out.println(Arrays.toString(parseResponseBody()));
+        is.create();
     }
 
 }
