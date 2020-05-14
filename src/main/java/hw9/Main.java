@@ -6,9 +6,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-//        List<String> newPath = new ArrayList<String>();
-//        newPath.add("hhhh");
-//        newPath.add("ggg");
+
         URL url = new URL.Composer("aaaaa.com")
                 .isSecure(false)
                 .authority("kate", "1234567")
