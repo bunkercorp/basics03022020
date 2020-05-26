@@ -36,6 +36,7 @@ public class JiraIssueUITestPage {
         driver.findElement(filter).click();
     }
     public void deleteIssue(){
+        // апи разве не позволяет удалять тикеты?
         driver.findElement(moreButton).click();
         driver.findElement(deleteIssueItem).click();
         driver.findElement(confirmDeleteIssue).click();

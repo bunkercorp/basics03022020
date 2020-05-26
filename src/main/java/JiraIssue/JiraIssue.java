@@ -23,6 +23,7 @@ public class JiraIssue {
     public JiraIssue() throws IOException {
     }
 
+    // это должно быть в отдельном классе, так как не относится к джире
     public static String getResponseBody() throws IOException {
         final String username = System.getenv("LOGIN");
         final String password = System.getenv("PASSWORD");
@@ -45,7 +46,7 @@ public class JiraIssue {
         return String.join("", result);
     }
 
-
+    // а вернуть объектик с нужными полями? Тебе же все равно известно, какой смысл несет каждая строка в конфле.
     private static String[] parseResponseBody() throws IOException {
         String responseBody = getResponseBody().trim();
         Document doc = Jsoup.parse(responseBody);
@@ -56,6 +57,7 @@ public class JiraIssue {
         return dataForRequest.split("\n");
     }
 
+    // это должно было произойти в самом тесте
     private final String[] keyValue = parseResponseBody();
 
     private String inProject() throws IOException {
@@ -68,6 +70,8 @@ public class JiraIssue {
 
     private String ofType() throws IOException {
         String taskType = keyValue[3];
+        //фу-фу-фу. При запросе на api/project/%id% тебе вернут объект, где в том числе будет поле issueTypes. От него и надо отталкиваться.
+        // все методы билдера, по факту, просто предварительно собирают информацию, и она должна быть провалидирована в методе create
         List<String> types = Arrays.asList("Bug", "Task", "Improvement", "New Feature", "Epic");
         if (!types.contains(taskType)) {
             throw new IllegalArgumentException("not valid type of ticket");
@@ -77,6 +81,7 @@ public class JiraIssue {
 
     private String withPriority() throws IOException {
         String priority = keyValue[9];
+        // фу-фу-фу. api/priority дает тебе список приоритетов.
         List<String> priorities = Arrays.asList("Lowest", "Low", "Medium", "Normal", "High", "Highest", "Blocker", "Critial", "Очень срочно");
         if (!priorities.contains(priority)) {
             throw new IllegalArgumentException("not valid type of ticket");
@@ -137,6 +142,7 @@ public class JiraIssue {
                 replace("]", "\"]").
                 replace(" ", "\"").
                 replace("<p>", "").replace("</p>", "");
+        // посмотри в сторону JSONObject
         return String.format("{\"fields\":{\"project\":{\"key\": \"%s\"}," +
                 "\"summary\":\"%s\"," +
                 "\"description\": \"%s\"," +
@@ -148,6 +154,7 @@ public class JiraIssue {
     public void create() throws IOException {
         final String username = System.getenv("LOGIN");
         final String password = System.getenv("PASSWORD");
+        // хелпер бы. К getResponseBody тоже относится
         final HttpsURLConnection httpCon = (HttpsURLConnection) new URL(urlJira).openConnection();
         String encoded = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
         httpCon.setRequestProperty("Authorization", "Basic " + encoded);
