@@ -19,6 +19,10 @@ public class JiraIssue {
     private String summary;
     private String jiraKey;
 
+    // зачем это конструктор зависит от билдера?
+    // Единственные поля, которые в JiraIssue имеют смысл это jiraKey и apiId,
+    // которые тебе джира вернет как ответ на твой апи запрос при создании тикета.
+    // может, айди проекта еще.
     private JiraIssue(Builder builder) {
         this.projectKey = builder.projectKey;
         this.issueTypeDisplayName = builder.issueTypeDisplayName;
@@ -39,6 +43,8 @@ public class JiraIssue {
         private String jiraKey;
 
         public Builder() {
+            // это должно было произойти в тесте,
+            // так как именно там следовало пойти в конфлю и создать тикет
             this.projectKey = ConfluenceController.getProjectKey();
             this.issueTypeDisplayName = ConfluenceController.getType();
             this.summary = ConfluenceController.getSummary();
@@ -76,6 +82,7 @@ public class JiraIssue {
         }
 
         public JiraIssue create() throws JiraExeption {
+            // незачем было плодить целый класс для валидаций. Им место прямо в этом методе.
             Validation validation = new Validation(summary, issueTypeDisplayName, projectKey, description, priorityDisplayName);
             validation.dataValidation();
             String response = new JiraControler().postJiraTicket(summary, issueTypeDisplayName,
