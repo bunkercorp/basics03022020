@@ -10,6 +10,8 @@ public class ConfigurationManager {
 
     public static ConfigurationManager getInstance() {
         if (instance == null) {
+            // обработка System.getenv("CM_BROWSER")\ System.getenv("CM_OS")
+            // должна была происходить здесь.
             instance = new ConfigurationManager();
         }
         return instance;
@@ -17,6 +19,8 @@ public class ConfigurationManager {
 
 
     private static Browser getBrowser() {
+        // return browser;
+
         String browser = System.getenv("CM_BROWSER").toLowerCase();
         if (browser.contains("chrome")) {
             return Browser.CHROME;
@@ -28,6 +32,7 @@ public class ConfigurationManager {
     }
 
     private static OS getOS() {
+        // return os
         String os = System.getenv("CM_OS").toLowerCase();
         if (os.contains("win")) {
             return OS.WINDOWS;

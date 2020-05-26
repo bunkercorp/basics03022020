@@ -17,11 +17,12 @@ public final class StdLogger extends Logger {
         }
         return instance;
     }
-
+    // по логике, это поле относится к Logger, а не к StdLogger
     private static int counter = 1;
 
     void log(String message) {
         final String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+        // :mm: =)
         DateFormat dateFormat = new SimpleDateFormat("HH:MM:ss:SSS");
         Date date = new Date();
         String dateNow = dateFormat.format(date);
