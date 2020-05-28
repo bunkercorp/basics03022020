@@ -10,16 +10,16 @@ public class Victim{
 
     @Test
     public static void test1() {
-        System.out.println("Test 10");
+        System.out.println("Test 1");
     }
 
-    @Test
-    public static void test2() throws MalformedURLException, InterruptedException {
-        System.out.println("Test 2");
-        BrowserFactory
-                .getDriver();
-//                .get("http://google.com.ua");
-//        Thread.sleep(2500);
-        Assert.assertTrue(false);
-    }
+//    @Test
+//    public static void test2() throws MalformedURLException, InterruptedException {
+//        System.out.println("Test 2");
+//        BrowserFactory
+//                .getDriver();
+////                .get("http://google.com.ua");
+////        Thread.sleep(2500);
+//        Assert.assertTrue(false);
+//    }
 }
