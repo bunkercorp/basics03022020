@@ -10,7 +10,7 @@ public class Victim{
 
     @Test
     public static void test1() {
-        System.out.println("Test 100500");
+        System.out.println("Test 10");
     }
 
     @Test
