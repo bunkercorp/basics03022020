@@ -35,11 +35,6 @@ public class ConfluenceTicketProvider {
                 then().extract().response().getBody().prettyPrint();
         return new JsonPath(body).getString("body.storage.value");
     }
-
-
-//        public static void main(String[] args)  {
-//        String b = bodyValueDoc.body().toString();
-//        System.out.println(bodyValueDoc.body());
 }
 
 
