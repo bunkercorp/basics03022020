@@ -1,25 +1,23 @@
 import com.google.gson.Gson;
-import org.openqa.selenium.json.Json;
-
 import java.util.HashMap;
-import java.util.List;
+
 
 import static io.restassured.RestAssured.given;
 
-public class JiraTicketCreator {
+public class JiraIssueCreator {
 
     private static String jiraBody(JiraIssue issue){
         HashMap body = new HashMap();
         HashMap fields = new HashMap();
         fields.put("summary", issue.getSummary());
         HashMap issuetype = new HashMap();
-        issuetype.put("id", issue.getIssueTypeDisplayName());
+        issuetype.put("name", issue.getIssueTypeDisplayName());
         fields.put("issuetype", issuetype);
         HashMap project = new HashMap();
-        project.put("id", issue.getProjectKey());
+        project.put("key", issue.getProjectKey());
         fields.put("project", project);
         HashMap priority = new HashMap();
-        priority.put("id", issue.getPriorityDisplayName());
+        priority.put("name", issue.getPriorityDisplayName());
         fields.put("priority", priority);
         fields.put("labels", issue.getLabels());
         fields.put("description", issue.getContent());
@@ -30,8 +28,7 @@ public class JiraTicketCreator {
         return gson.toJson(body);
     }
 
-    private static String postJiraTicket(JiraIssue issue) {
-
+    public static String postJiraIssue(JiraIssue issue) {
         String response = given().auth().preemptive().
                 basic("knaimark", "1234567").
                 header("Content-Type", "application/json").
@@ -40,4 +37,20 @@ public class JiraTicketCreator {
                 then().statusCode(201).extract().asString();
         return response;
     }
+
+    public static String getPriority(){
+        return given().auth().preemptive().
+                basic("knaimark", "1234567").
+                when().log().all().get(  "https://jira.hillel.it/rest/api/2/priority").
+                then().extract().response().asString();
+    }
+
+    public static String getProject(String project){
+        return given().auth().preemptive().
+                basic("knaimark", "1234567").
+                when().log().all().get(  "https://jira.hillel.it/rest/api/2/project/" + project).
+                then().extract().response().asString();
+    }
+
 }
+
