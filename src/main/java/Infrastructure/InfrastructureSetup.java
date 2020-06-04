@@ -3,6 +3,7 @@ package Infrastructure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -25,11 +26,11 @@ public class InfrastructureSetup {
         return instance;
     }
 
-    public WebDriver setDriver(Browser browserType) {
+    public WebDriver setDriver(Infrastructure.Browser browserType) {
         if (driver == null) {
-            if (browserType.equals(Browser.CHROME)) {
+            if (browserType.equals(Infrastructure.Browser.CHROME)) {
                 return driver = initChromeDriver();
-            } else if (browserType.equals(Browser.FIREFOX)) {
+            } else if (browserType.equals(Infrastructure.Browser.FIREFOX)) {
                 return driver = initFirefoxDriver();
             } else {
                 System.out.println("browser : " + browserType + " is invalid, launching Chrome as browser by default");
@@ -40,9 +41,9 @@ public class InfrastructureSetup {
     }
 
     private WebDriver initChromeDriver() {
-        if (Objects.equals(OS.currentOS(), OS.WINDOWS)) {
+        if (Objects.equals(Infrastructure.OS.currentOS(), Infrastructure.OS.WINDOWS)) {
             System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver.exe");
-        } else if (Objects.equals(OS.currentOS(), OS.LINUX)) {
+        } else if (Objects.equals(Infrastructure.OS.currentOS(), Infrastructure.OS.LINUX)) {
             System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
         } else {
             throw new RuntimeException("os undefined");
@@ -56,9 +57,9 @@ public class InfrastructureSetup {
 
 
     private WebDriver initFirefoxDriver() {
-        if (Objects.equals(OS.currentOS(), OS.WINDOWS)) {
+        if (Objects.equals(Infrastructure.OS.currentOS(), Infrastructure.OS.WINDOWS)) {
             System.setProperty("webdriver.gecko.driver", driverPath + "geckodriver.exe");
-        } else if (Objects.equals(OS.currentOS(), OS.LINUX)) {
+        } else if (Objects.equals(Infrastructure.OS.currentOS(), Infrastructure.OS.LINUX)) {
             System.setProperty("webdriver.chrome.driver", driverPath + "geckodriver");
         } else {
             throw new RuntimeException("os undefined");
@@ -69,4 +70,5 @@ public class InfrastructureSetup {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         return driver;
     }
+
 }
