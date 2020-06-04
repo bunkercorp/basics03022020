@@ -86,6 +86,7 @@ public class hostelPriceTest extends TestEnvSetup {
         waitForLoaderInvisibility();
         searchResults.openFirstHostelInList();
         String listAfter = driver.findElement(By.cssSelector(".sr_header > h2")).getText();
+        //Assert results filtered
         Assert.assertNotEquals(listAfter, listBefore);
 
 
