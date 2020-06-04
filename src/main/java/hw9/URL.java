@@ -1,8 +1,7 @@
 package homeworks.hw9;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class URL {
     private boolean security;
@@ -27,6 +26,7 @@ public class URL {
     public static class Composer{
         private boolean security;
         private int port;
+       // List<String> и хранить там все фрагменты пути
         private String path = null;
         private HashMap<String, String> params = new HashMap<String, String>();
         private String authority;
@@ -59,6 +59,7 @@ public class URL {
             if (!username.trim().matches("^[a-zA-Z0-9-_]+$|^[a-zA-Z0-9-_]+\\.[a-zA-Z0-9-_]+$")) {
                 throw new IllegalArgumentException("Username is not valid");
             }
+// можно было бы попробовать простить пользователю эту ошибку и попробовать не включать пробел в авторити, прямо как в authority(String username)
             if (password.equals("")) {
                 throw new IllegalArgumentException("Password is empty");
             }
@@ -67,6 +68,10 @@ public class URL {
 
         }
         public Composer(String domain) throws IllegalArgumentException{
+            // через месяц прочитаешь эту регулярку? :)
+            // как вариант, можно было бы сделать split(".")
+            // и сделать validate каждому фрагменту
+            // Останется как-то учесть, что айпи тоже может быть доменом
             String DOMAIN_PATTERN = "^(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))\\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\\.[a-zA-Z]{2,3})$";
             if(domain.matches(DOMAIN_PATTERN))
                 this.domain = domain;
@@ -77,6 +82,7 @@ public class URL {
             if(port > 0 && port< 65535)
                 this.port = port;
             else
+                // port = 65536 ;)
                 throw new IllegalArgumentException("Port must be greater than 0");
             return this;
         }
@@ -85,6 +91,12 @@ public class URL {
 //       String regEx = "(\\/[a-zA-Z0-9-_].*(\\?|$))";
             String regEx = "[a-zA-Z0-9-_]*$";
             if(path.matches(regEx)) {
+//            Pattern trimSlashesPattern = Pattern.compile("^\\/*(.*?)\\/*$");
+//           Matcher m = trimSlashesPattern.matcher(path.trim());
+//           m.find();
+//            String pathTrimmedSlashes   = m.group(1);
+//            или как-то так
+// если охота избавиться от слешей в начале \конце
                 this.path = (path.charAt(0) == '/') ? path.substring(1, path.length() - 1) : path;
             } else {
                 throw new IllegalArgumentException("This path is not correct");
@@ -93,7 +105,9 @@ public class URL {
         }
 
         public Composer path(String... paths){
-
+            // смущает то, что этот код - полный копипаст метода ниже
+            // я уверен ,есть другой путь
+            //  например, просто вызвать здесь path(Arrays.stream(paths).collect(Collectors.toList()))
             for(String path : paths) {
                 validate(path);
                 if (this.path == null)
@@ -104,6 +118,7 @@ public class URL {
             return this;
         }
         public Composer path(Collection<String> pathCollection){
+
             for(String path : pathCollection) {
                 validate(path);
                 if (this.path == null)
@@ -120,6 +135,7 @@ public class URL {
             this.params.put(param,param);
             return this;
         }
+        // String name, String value ???
         public Composer param(String param1, String param2){
             validate(param1);
             validate(param2);
