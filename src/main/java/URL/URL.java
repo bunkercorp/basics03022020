@@ -2,6 +2,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class URL {
     private String host;
@@ -37,7 +38,7 @@ public class URL {
         if (this.authority == null) {
             this.authority = "";
         }
-
+    // серьезно? вот прям между host и port нету двоеточия, например?
         return Composer.isSecure(false) + "://" + authority + host + port + path + param + fragment;
 
     }
@@ -61,13 +62,14 @@ public class URL {
                 throw new RuntimeException(exception.getCause());
             }
         }
-
+    // чем не мило хранить признак защищенного соединения как просто флаг?
         public static String isSecure(boolean enterHereTrueOrFalse) {
             return enterHereTrueOrFalse ? "https" : "http";
         }
 
         public static String hostFormat(String host) {
             String str = host.trim();
+            // те, кто будет суппортить твой код, будут признательны если ты регулярки будешь оформлять в константы с говорящими именами
             if (!str.matches("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}")) {
                 throw new IllegalArgumentException("not valid host name");
             }
@@ -76,6 +78,7 @@ public class URL {
 
         private String port(int port) {
             if (port >= 1 && port <= 65535) {
+                // присоединять двоеточие - задача toString
                 return ":" + port;
             } else {
                 throw new IllegalArgumentException("not valid port set");
@@ -84,9 +87,12 @@ public class URL {
 
         public String path(String path) {
             String str = path.trim();
+//            List<Character> forbiddenChars =  List.of('\\', '/',':','?', '*', '<', '>', '|' );
+//            boolean strInvalid = str.chars().anyMatch(charCode -> forbiddenChars.contains((char) charCode));
             if (str.contains("\\") || str.contains("/") || str.contains(":")
                     || str.contains("?") || str.contains("*") || str.contains("\"")
                     || str.contains("<") || str.contains(">") || str.contains("|")) {
+                // в каком именно пути? Именно это я подумаю, когда увижу такую ошибку у себя в логах
                 throw new IllegalArgumentException("not valid symbols in path");
             } else if (str.equals("")) {
                 throw new IllegalArgumentException("not valid path, directory can't be unnamed");
@@ -100,11 +106,13 @@ public class URL {
                 String newStr = str.trim();
                 if (str.trim().equals("")) {
                     throw new IllegalArgumentException("not valid path, directory can't be unnamed");
+                // пахнет копипастом. Уверен ,есть другой путь
                 } else if (str.contains("\\") || str.contains("/") || str.contains(":")
                         || str.contains("?") || str.contains("*") || str.contains("\"")
                         || str.contains("<") || str.contains(">") || str.contains("|")) {
                     throw new IllegalArgumentException("not valid symbols in path");
                 }
+                // мутировать входной аргумент - жуткий моветон
                 strings[i] = "" + newStr;
             }
 
@@ -124,11 +132,13 @@ public class URL {
                 String newStr = str.trim();
                 if (str.trim().equals("")) {
                     throw new IllegalArgumentException("not valid path, directory can't be unnamed");
+                // ...
                 } else if (str.contains("\\") || str.contains("/") || str.contains(":")
                         || str.contains("?") || str.contains("*") || str.contains("\"")
                         || str.contains("<") || str.contains(">") || str.contains("|")) {
                     throw new IllegalArgumentException("not valid symbols in path");
                 }
+                // ...
                 arrayPath[i] = "" + newStr;
             }
 
