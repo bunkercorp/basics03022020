@@ -2,6 +2,8 @@ package homeworks.hw9;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class URL {
 
@@ -40,6 +42,7 @@ public class URL {
 
 
         public Composer(String domain) {
+           // "      " \ null ??
             if (!domain.equals(""))
                 this.domain = domain;
             else
@@ -47,6 +50,7 @@ public class URL {
         }
 
         public Composer isSecure(boolean protocol) {
+            // по хорошему, поле тоже надо было как-то поименовать навроде isSSL \ isSecure или что то в таком духе. true\false это не протокол
             this.protocol = protocol;
             return this;
         }
@@ -74,6 +78,8 @@ public class URL {
             int count = 0;
 
             if (this.path == null) {
+
+                // String.join("/", paths). И всё.
                 for (String path : paths) {
                     if (!path.equals("")) {
                         String tempPath = slashPath(path);
@@ -115,6 +121,7 @@ public class URL {
 
         public Composer setParam(String param) {
             if (this.param == null) {
+                // "      " \ null ??
                 if (!param.equals("")) {
                     if (!param.startsWith("?"))
                         this.param = param;
@@ -153,6 +160,7 @@ public class URL {
                         if (!entry.getValue().equals("")) {
                             stringBuilder.append("=").append(entry.getValue());
                         } else
+                            // окей, эта библиотека используется на проекте с X строк кода... Я вижу в логах сообщение "Not valid parameter". О чем оно мне говорит? Куда я должен обратить внимание?
                             throw new IllegalArgumentException("Not valid parameter");
                     } else
                         throw new IllegalArgumentException("Not valid parameter");
@@ -249,8 +257,13 @@ public class URL {
         }
 
         private String slashPath(String path) {
+//            Pattern trimSlashesPattern = Pattern.compile("^\\/*(.*?)\\/*$");
+//           Matcher m = trimSlashesPattern.matcher(path.trim());
+//           m.find();
+//            String pathTrimmedSlashes   = m.group(1);
+//            или как-то так
             String tempPath = path;
-            if (path.startsWith("/") && path.endsWith("/"))
+                        if (path.startsWith("/") && path.endsWith("/"))
                 tempPath = path.substring(1, path.length() - 1);
             else if (path.startsWith("/"))
                 tempPath = path.substring(1);
@@ -262,6 +275,7 @@ public class URL {
 
     @Override
     public String toString() {
+        // String.format("http%s://", protocol? "s": "")
         String result = protocol ? "https://" : "http://";
 
         if (authority != null)
@@ -270,12 +284,16 @@ public class URL {
         if (domain != null)
             result = result + domain;
 
+
         if ((port != defaultHttpsPort & protocol) || (port != defaultHttpPort & !protocol))
             result = result + ":" + port;
 
         if (path != null)
             result = result + "/" + path;
 
+// а вот если бы param был бы Map<String, String>, чем он и является в жизни, то это было бы просто
+// result + "?" + param.entrySet().stream().map(e -> String.format("%s=%s", e.getKey(), e.getValue)).collect(Collectors.joining())
+// без всей той логики в setPAram что у тебя там есть
         if (param != null)
             result = result + "?" + param;
 
