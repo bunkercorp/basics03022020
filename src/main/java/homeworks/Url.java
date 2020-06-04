@@ -32,8 +32,10 @@ public class Url {
         private int port;
         private boolean security;
         private String domain;
+        // List<String> для пути более оптимально было бы
         private String path = null;
         private HashMap<String, String> params = new HashMap<>();
+        // ??? В этой мапе всегда будет одно значение. Может, есть смысл пойти каким-нибудь другим путем?
         private HashMap<String, String> authority = new HashMap<>();
         private String fragment = null;
 
@@ -47,8 +49,10 @@ public class Url {
         }
 
         public Composer isSecure(boolean security) {
+           // представь себе private static final Map<Boolean, Integer> defaultPorts...
             if (security) {
                 if (this.port == 0) {
+            // пользователь может это перетереть, так что это лишнее движение
                     this.port = 443;
                 }
             } else {
@@ -63,6 +67,7 @@ public class Url {
         }
 
         public Composer authority(String user) {
+            // Было бы неплохо больше конкретизировать ,какая строка не прошла валидацию. Чтобы в условных логах было удобнее разбираться.
             isCorrectString(user,"user string - authority");
             if (this.authority.isEmpty())
                 this.authority.put(user, null);
@@ -94,6 +99,8 @@ public class Url {
 
 
         public Composer path(String... path) {
+         // выглядит как полный копипаст метода ниже
+         // как насчет просто вызвать здесь path(Arrays.stream(path).collect(Collectors.toList()))?
             for (String c : path) {
                 isCorrectString(c,"one of path string");
                 if (this.path == null)
@@ -115,6 +122,7 @@ public class Url {
             return this;
         }
 
+// почему не просто вызвать здесь param(param, param) ? ВАлидации -то там уже есть
         public Composer param(String param) {
             if (this.params.isEmpty()) {
                 //decompile strig to name and value
