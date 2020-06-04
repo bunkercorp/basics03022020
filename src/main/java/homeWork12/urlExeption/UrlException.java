@@ -1,5 +1,5 @@
 package homeWork12.urlExeption;
-
+// сильно надо, чтоб он был паблик? Может, ему место в файле с собственно урлом?
 public class UrlException extends Exception {
     public UrlException() {
     }

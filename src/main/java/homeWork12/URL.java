@@ -19,7 +19,7 @@ public class URL {
     private String param;
     private String authority;
     private String fragment;
-
+// Люто и брутально. Нет, в данном конкретном случае проброс билдера в конструктор, конечно, рабочий вариант.
     private URL(Composer composer) {
         this.isSecure = composer.isSecure;
         this.host = composer.host;
@@ -53,6 +53,7 @@ public class URL {
 
         public Composer isSecure(boolean secure) {
             isSecure = secure;
+            // с чего бы? а если юзер руками установил ССЛ и 80 порт?
             if (isSecure && port == 80)
                 port = 443;
             return this;
@@ -76,7 +77,10 @@ public class URL {
 
         public Composer path(String... path) throws UrlException, UnsupportedEncodingException {
             this.path = "";
+          // сильно смущает что сие есть полный копипаст метода ниже
+            // как насчет вызова здесь path(Arrays.stream(path).collect(Collectors.toList())) ?
             for (String a : path) {
+                // а чего только пробелы? А если тебе во фрагментах пути слешей насовали, например?
                 a = UrlHelpers.removeSpacesInPath(a);
                 if (UrlValidation.FORBIDDEN_PATH.matcher(a).find())
                     throw new UrlException("Invalid path :" + path);
@@ -85,7 +89,7 @@ public class URL {
             }
             return this;
         }
-
+// Заказано Collection<String>
         public Composer path(List<String> path) throws UrlException, UnsupportedEncodingException {
             for (String a : path) {
                 a = UrlHelpers.removeSpacesInPath(a);
@@ -98,6 +102,8 @@ public class URL {
         }
 
         public Composer param(String param) throws UrlException {
+           // хм. А вот если бы this.param был бы типа Map<String, String>
+            // то при нулловом параме ты бы просто не делал put(), таким образом прощая ошибку пользователю.
             if (param == null)
                 throw new UrlException("Invalid parameter");
             this.param = "/" + param;
@@ -106,12 +112,15 @@ public class URL {
 
         public Composer param(String key, String value) throws UrlException {
             if (key == null || value == null)
+                // я представляю ,как я вижу подобную ошибку в своих логах где-нибудь. Было бы неплохо все таки писать, в какой конкретно паре Invalid key or value
                 throw new UrlException("Invalid key or value ");
+           // в урле может быть несколько пар параметров
             this.param = String.format("?%s=%s", key, value);
             return this;
         }
 
         public Composer params(Map<String, String> param) {
+            // какой смысл в этом назначении?
             this.param = "?";
             this.param = param.entrySet().stream().map(e -> String.format("%s=%s", e.getKey(), e.getValue())).
                     collect(Collectors.joining("&"));
@@ -120,6 +129,7 @@ public class URL {
 
         public Composer authority(String username) throws UrlException {
             if (username == null)
+                // попробуй продумать, какие ошибки пользователю ты можешь простить
                 throw new UrlException("Invalid username value ");
             this.authority = username + "@";
             return this;
