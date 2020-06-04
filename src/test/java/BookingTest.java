@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
@@ -99,6 +100,25 @@ public class BookingTest {
         Thread.sleep(2000);
         validateBreadcramps();
 
+        validateYellowForm();
+
+        List<WebElement> oldnames = browser.findElements(By.cssSelector(
+                ".sr_flex_layout > .sr_item_content_slider_wrapper .hotel_name_link > .sr-hotel__name"));
+        for (int i = 0; i < oldnames.size(); i++)
+            System.out.println(oldnames.get(i).getText().trim());
+
+        browser.findElement(By.cssSelector("div#filter_hoteltype > div[role='group'] > a:nth-of-type(4) > .bui-checkbox > .filter_item")).click();
+        Thread.sleep(2000);
+        System.out.println("----------------------");
+
+        List<WebElement> newnames = browser.findElements(By.cssSelector(
+                ".sr_flex_layout > .sr_item_content_slider_wrapper .hotel_name_link > .sr-hotel__name"));
+        for (int i = 0; i < newnames.size(); i++)
+            System.out.println(newnames.get(i).getText().trim());
+
+        Assert.assertNotEquals(oldnames, newnames);
+
+        browser.findElement(By.xpath("//div[@id='hotellist_inner']/div[1]/div[2]//a[1]/span[1]")).click();
 
     }
 
