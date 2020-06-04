@@ -1,4 +1,4 @@
-package infrastructure;
+package Infrastructure;
 
 public enum Browser {
     CHROME,
