@@ -121,7 +121,7 @@ public class JiraIssue {
             System.out.println(summary);*/
 
             JiraIssue issue = new JiraIssue(projectKey, issueTypeDisplayName, priorityDisplayName, labels, content, summary);
-
+            // помимо нулловых значений,с полями могут быть и другие проблемы, например, несуществующий проджектКей
             if (projectKey == null || priorityDisplayName == null || summary == null || issueTypeDisplayName == null ||
                     content == null) {
                 throw new IOException("not enough data: " + issue.toString());
@@ -132,7 +132,7 @@ public class JiraIssue {
     }//Builder
 
     final static String urlJ = "https://jira.hillel.it/rest/api/2/issue";
-
+    // тебе не хотелось иметь какой-нибудь http хелпер для такого случая?
     public static void postJiraIssue(JiraIssue issue) throws IOException {
         final HttpsURLConnection httpCon = (HttpsURLConnection) new URL(urlJ).openConnection();
 
@@ -153,7 +153,7 @@ public class JiraIssue {
         final int responseCode = httpCon.getResponseCode();
         ArrayList<String> result = new ArrayList<String>();
         BufferedReader br;
-
+        // хмммм.... =)
         try {
             br = new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
         } catch (Throwable t) {
@@ -163,6 +163,7 @@ public class JiraIssue {
         while ((line = br.readLine()) != null) {
             result.add(line);
             if (responseCode != 201) {
+                // а если как-то интерпретировать сложившуюся ситуацию и сообщить о ней пользователью ,а не просто бросать исключение?
                 throw new IllegalArgumentException(String.valueOf(result));
             }
         }
