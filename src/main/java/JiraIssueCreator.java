@@ -33,6 +33,7 @@ public class JiraIssueCreator {
                 basic("knaimark", "1234567").
                 header("Content-Type", "application/json").
                 body(jiraBody(issue)).
+                // вынести "https://jira.hillel.it/rest/api/2/" в какую-нибудь константу?
                 when().log().all().post("https://jira.hillel.it/rest/api/2/issue/").
                 then().statusCode(201).extract().asString();
         return response;
@@ -42,6 +43,7 @@ public class JiraIssueCreator {
         return given().auth().preemptive().
                 basic("knaimark", "1234567").
                 when().log().all().get(  "https://jira.hillel.it/rest/api/2/priority").
+                // а если запрос упадет?
                 then().extract().response().asString();
     }
 
