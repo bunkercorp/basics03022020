@@ -14,14 +14,14 @@ public class Driver {
 
     public static WebDriver getDriver() throws MalformedURLException {
 
-        final String binPath = String.format("%s/bin/chromedriver.exe", System.getProperty("user.dir"));
-        System.setProperty("webdriver.chrome.driver", binPath);
+        //final String binPath = String.format("%s/bin/chromedriver.exe", System.getProperty("user.dir"));
+        //System.setProperty("webdriver.chrome.driver", binPath);
 
         ChromeOptions options = new ChromeOptions();
         //options.addArguments("--headless");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        //capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
         if (driver == null) {
 
