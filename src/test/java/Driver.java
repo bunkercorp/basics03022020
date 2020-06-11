@@ -25,7 +25,7 @@ public class Driver {
 
         if (driver == null) {
 
-            driver = new RemoteWebDriver(new URL("http://192.168.0.231:444/wb/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("http://192.168.0.231:4444/wb/hub"), capabilities);
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
