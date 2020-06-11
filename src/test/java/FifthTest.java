@@ -25,6 +25,6 @@ public class FifthTest {
 
         driver.findElement(inputGoogle).sendKeys("123456789");
 
-        //driver.quit();
+        driver.quit();
     }
 }

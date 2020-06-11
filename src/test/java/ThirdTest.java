@@ -25,7 +25,7 @@ public class ThirdTest {
 
         driver.findElement(inputGoogle).sendKeys("Test1234");
 
-        //driver.quit();
+        driver.quit();
     }
 }
 

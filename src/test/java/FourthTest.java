@@ -25,6 +25,6 @@ public class FourthTest {
 
         driver.findElement(inputGoogle).sendKeys("Test!@#!!@#");
 
-        //driver.quit();
+        driver.quit();
     }
 }

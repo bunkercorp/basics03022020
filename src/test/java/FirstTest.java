@@ -25,6 +25,6 @@ public class FirstTest {
 
         driver.findElement(inputGoogle).sendKeys("Test");
 
-        //driver.quit();
+        driver.quit();
     }
 }
