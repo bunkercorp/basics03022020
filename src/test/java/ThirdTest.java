@@ -13,7 +13,7 @@ public class ThirdTest {
 
     @Test
     public void testBasic() {
-        final String binPath = String.format("%s/bin/chromedriver", System.getProperty("user.dir"));
+        final String binPath = String.format("%s/bin/chromedriver.exe", System.getProperty("user.dir"));
         System.setProperty("webdriver.chrome.driver", binPath);
 
         driver = new ChromeDriver();
